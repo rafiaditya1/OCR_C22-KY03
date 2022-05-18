@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30104166666666665" />
+        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/drawable/ic_baseline_camera.xml" value="0.24" />
+        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_selfie.xml" value="0.4" />
+        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_take_selfie.xml" value="0.3625" />
       </map>
     </option>
   </component>
