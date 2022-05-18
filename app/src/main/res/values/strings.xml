@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OCR_C22-KY03</string>
+    <string name="welcome_image">welcome image</string>
+    <string name="add_verification">Add Verification</string>
+    <string name="status">Status</string>
+    <string name="title_home">Welcome to OCR KTP</string>
 </resources>
