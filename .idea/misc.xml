@@ -3,16 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/drawable/ic_baseline_camera.xml" value="0.24" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/drawable/ic_outline_circle_24.xml" value="0.1" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/drawable/ic_place_holder.xml" value="0.1" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/drawable/oval_1.xml" value="0.22" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_history.xml" value="0.33" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_result_selfie.xml" value="0.40871021775544386" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_selfie.xml" value="0.4397590361445783" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_take_selfie.xml" value="0.3625" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/item_row_history.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.215" />
+        <entry key="app/src/main/res/drawable/border_button.xml" value="0.142" />
+        <entry key="app/src/main/res/drawable/ic_baseline_insert_photo_24.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.215" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.142" />
+        <entry key="app/src/main/res/layout/activity_ktp.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_ktp_result.xml" value="0.26510416666666664" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30104166666666665" />
+        <entry key="app/src/main/res/layout/activity_scan.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_selfie.xml" value="0.25" />
       </map>
     </option>
   </component>
