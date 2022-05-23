@@ -85,10 +85,10 @@ class ResultSelfieActivity : AppCompatActivity() {
                     BitmapFactory.decodeFile(myFile.path),
                     isBackCamera
                 )
-            var a = result.toSelfie(result)
-            getFile = bitmapToFile(a, application)
+            val resultCircle = result.toSelfie(result)
+            getFile = bitmapToFile(resultCircle, application)
             Glide.with(this)
-                .load(a)
+                .load(resultCircle)
                 .into(binding.previewImageView)
 
 
