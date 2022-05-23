@@ -3,6 +3,7 @@ package com.bangkit.ocr_c22_ky03
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.databinding.ActivityResultSelfieBinding
 import com.bangkit.ocr_c22_ky03.databinding.ActivityTakeSelfieBinding
 import java.io.File
+import kotlin.math.min
 
 class ResultSelfieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultSelfieBinding
@@ -75,14 +77,20 @@ class ResultSelfieActivity : AppCompatActivity() {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
             val result = rotateBitmap(
                 BitmapFactory.decodeFile(myFile.path),
                 isBackCamera
             )
 
-            binding.previewImageView.setImageBitmap(result)
+            result.apply {
+                toSquare()?.let {
+                    binding.previewImageView.setImageBitmap(it)
+                }
+            }
+
+//            binding.previewImageView.setImageBitmap(result)
         }
+
     }
 
 

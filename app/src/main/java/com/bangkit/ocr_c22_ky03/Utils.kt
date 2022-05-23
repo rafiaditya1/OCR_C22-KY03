@@ -8,6 +8,7 @@ import android.os.Environment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.min
 
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
@@ -61,3 +62,23 @@ fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean = false): Bitmap {
         )
     }
 }
+
+fun Bitmap.toSquare():Bitmap?{
+    // get the small side of bitmap
+    val side = min(width,height)
+
+    // calculate the x and y offset
+    val xOffset = (width - side) /2
+    val yOffset = (height - side)/2
+
+    // create a square bitmap
+    // a square is closed, two dimensional shape with 4 equal sides
+    return Bitmap.createBitmap(
+        this, // source bitmap
+        xOffset, // x coordinate of the first pixel in source
+        yOffset, // y coordinate of the first pixel in source
+        side, // width
+        side // height
+    )
+}
+
