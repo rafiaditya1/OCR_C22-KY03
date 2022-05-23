@@ -3,7 +3,6 @@
     package="com.bangkit.ocr_c22_ky03">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OCR_C22KY03">
         <activity
+            android:name=".SelfieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".KtpResultActivity"
             android:exported="false" />
         <activity
@@ -23,6 +28,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TakeSelfieActivity"
             android:exported="false" />
         <activity
             android:name=".KtpActivity"
