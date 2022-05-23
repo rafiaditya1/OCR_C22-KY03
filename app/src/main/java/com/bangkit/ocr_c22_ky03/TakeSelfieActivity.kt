@@ -77,7 +77,7 @@ class TakeSelfieActivity : AppCompatActivity() {
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
 
-                    setResult(ResultSelfieActivity.CAMERA_X_RESULT, intent)
+                    setResult(SelfieActivity.CAMERA_X_RESULT, intent)
                     finish()
 
 //                    startActivity(Intent(this@TakeSelfieActivity, HistoryActivity::class.java))

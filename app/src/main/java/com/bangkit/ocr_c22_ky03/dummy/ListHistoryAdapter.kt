@@ -7,17 +7,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.ocr_c22_ky03.R
-import java.util.ArrayList
+import com.bumptech.glide.Glide
 
-class ListHistoryAdapter(private val listHero: ArrayList<Users>) : RecyclerView.Adapter<ListHistoryAdapter.ListViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
+class ListHistoryAdapter(private val listHero: ArrayList<Users>) :
+    RecyclerView.Adapter<ListHistoryAdapter.ListViewHolder>() {
+//    private lateinit var onItemClickCallback: OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
+//    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+//        this.onItemClickCallback = onItemClickCallback
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_history, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_row_history, parent, false)
         return ListViewHolder(view)
     }
 
@@ -25,8 +27,22 @@ class ListHistoryAdapter(private val listHero: ArrayList<Users>) : RecyclerView.
         val hero = listHero[position]
         holder.tvName.text = hero.name
         holder.tvDetail.text = hero.date
+        if (hero.status == "verified") {
+            Glide.with(holder.itemView.context)
+                .load(R.drawable.sts_verified)
+                .into(holder.status)
+        } else if (hero.status == "on process") {
+            Glide.with(holder.itemView.context)
+                .load(R.drawable.sts_process)
+                .into(holder.status)
 
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
+        } else {
+            Glide.with(holder.itemView.context)
+                .load(R.drawable.sts_rejected)
+                .into(holder.status)
+        }
+
+//        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
     }
 
 
@@ -38,10 +54,12 @@ class ListHistoryAdapter(private val listHero: ArrayList<Users>) : RecyclerView.
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_name)
         var tvDetail: TextView = itemView.findViewById(R.id.tv_date)
+        var status: ImageView = itemView.findViewById(R.id.img_sts)
+
 
     }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: Users)
-    }
+//    interface OnItemClickCallback {
+//        fun onItemClicked(data: Users)
+//    }
 }
