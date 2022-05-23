@@ -13,12 +13,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.databinding.ActivityResultSelfieBinding
 import com.bangkit.ocr_c22_ky03.databinding.ActivityTakeSelfieBinding
+import com.bumptech.glide.Glide
 import java.io.File
 import kotlin.math.min
 
 class ResultSelfieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultSelfieBinding
 
+    private var getFile: File? = null
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -77,16 +79,18 @@ class ResultSelfieActivity : AppCompatActivity() {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-            val result = rotateBitmap(
-                BitmapFactory.decodeFile(myFile.path),
-                isBackCamera
-            )
 
-            result.apply {
-                toSquare()?.let {
-                    binding.previewImageView.setImageBitmap(it)
-                }
-            }
+            val result =
+                rotateBitmap(
+                    BitmapFactory.decodeFile(myFile.path),
+                    isBackCamera
+                )
+            var a = result.toSelfie(result)
+            getFile = bitmapToFile(a, application)
+            Glide.with(this)
+                .load(a)
+                .into(binding.previewImageView)
+
 
 //            binding.previewImageView.setImageBitmap(result)
         }

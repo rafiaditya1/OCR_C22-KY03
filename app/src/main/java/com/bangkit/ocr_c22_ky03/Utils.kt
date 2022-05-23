@@ -2,10 +2,11 @@ package com.bangkit.ocr_c22_ky03
 
 import android.app.Application
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Matrix
+import android.graphics.*
 import android.os.Environment
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
@@ -82,3 +83,49 @@ fun Bitmap.toSquare():Bitmap?{
     )
 }
 
+
+fun Bitmap.toSelfie(bitmap:Bitmap?):Bitmap?{
+    val squareBitmapWidth = min(width,height)
+    // Initialize a new instance of Bitmap
+    // Initialize a new instance of Bitmap
+    val dstBitmap = Bitmap.createBitmap(
+        squareBitmapWidth,  // Width
+        squareBitmapWidth,  // Height
+        Bitmap.Config.ARGB_8888 // Config
+    )
+    val canvas = Canvas(dstBitmap)
+    // Initialize a new Paint instance
+    // Initialize a new Paint instance
+    val paint = Paint()
+    paint.isAntiAlias = true
+    val rect = Rect(0, 0, squareBitmapWidth, squareBitmapWidth)
+    val rectF = RectF(rect)
+    canvas.drawOval(rectF, paint)
+    paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+    // Calculate the left and top of copied bitmap
+    // Calculate the left and top of copied bitmap
+    val left = ((squareBitmapWidth - width) / 2).toFloat()
+    val top = ((squareBitmapWidth - height) / 2).toFloat()
+    bitmap?.let { canvas.drawBitmap(it, left, top, paint) }
+    // Free the native object associated with this bitmap.
+    // Free the native object associated with this bitmap.
+    recycle()
+    // Return the circular bitmap
+    // Return the circular bitmap
+    return dstBitmap
+}
+
+fun bitmapToFile(bitmap: Bitmap?, application: Application): File {
+    val photoFile = createFile(application)
+    val bmpStream = ByteArrayOutputStream()
+
+    bitmap?.compress(Bitmap.CompressFormat.PNG, 100, bmpStream)
+    val bmpPicByteArray = bmpStream.toByteArray()
+
+    val fos = FileOutputStream(photoFile)
+    fos.write(bmpPicByteArray)
+    fos.flush()
+    fos.close()
+
+    return photoFile
+}
