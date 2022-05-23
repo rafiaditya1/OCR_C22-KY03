@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OCR_C22-KY03</string>
+    <string name="take_picture_failed">Take Picture Failed</string>
+    <string name="failed_to_show_camera">Failed to show camera</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="please_insert_image">Please insert image</string>
 </resources>
