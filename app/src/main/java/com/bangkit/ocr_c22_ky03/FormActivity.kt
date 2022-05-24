@@ -15,7 +15,7 @@ class FormActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnFinish.setOnClickListener{
-            intent = Intent(this@FormActivity, MainActivity::class.java)
+            intent = Intent(this@FormActivity, SelfieActivity::class.java)
             startActivity(intent)
         }
     }

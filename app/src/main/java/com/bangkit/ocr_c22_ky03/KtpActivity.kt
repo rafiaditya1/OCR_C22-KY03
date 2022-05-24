@@ -59,7 +59,10 @@ class KtpActivity : AppCompatActivity() {
 
         binding.btnScan.setOnClickListener { startCameraX() }
         binding.btnTryAgain.setOnClickListener { startCameraX() }
-        binding.btnNext.setOnClickListener {  }
+        binding.btnNext.setOnClickListener {
+            intent = Intent(this@KtpActivity, FormActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun startCameraX() {
