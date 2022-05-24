@@ -1,7 +1,9 @@
 package com.bangkit.ocr_c22_ky03
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.ocr_c22_ky03.dummy.ListHistoryAdapter
@@ -29,12 +31,14 @@ class HistoryActivity : AppCompatActivity() {
         val listHeroAdapter = ListHistoryAdapter(list)
         rvHistory.adapter = listHeroAdapter
 //
-//        listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
-//            override fun onItemClicked(data: Hero) {
-//                showSelectedHero(data)
-//            }
-//        })
+        listHeroAdapter.setOnItemClickCallback(object : ListHistoryAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Users) {
+                intent = Intent(this@HistoryActivity, DetailActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
+
 
 
 }
