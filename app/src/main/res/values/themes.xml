@@ -18,30 +18,50 @@
     <style name="Text">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Text.Header">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.SubHeader">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Title">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Subtitle">
         <item name="android:textSize">10sp</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
+    <style name="Text.Subtitle.Bold">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
 
     <style name="Text.Description">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
+
+
+    <style name="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="Button.Large">
+        <item name="android:layout_width">230dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
 </resources>
