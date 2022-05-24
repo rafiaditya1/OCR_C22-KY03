@@ -11,4 +11,5 @@
     <color name="primary_blue">#2DAEDD</color>
     <color name="grey">#BBBBBB</color>
     <color name="light_grey">#A4A4A4</color>
+    <color name="button_color">#0094DB</color>
 </resources>
