@@ -14,14 +14,14 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:contentDescription="@string/preview"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_tryagain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_subheader"
-        app:srcCompat="@drawable/ic_place_holder"
-        android:contentDescription="@string/preview" />
+        app:srcCompat="@drawable/ic_place_holder" />
 
 
     <Button
@@ -30,6 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/border_button"
         android:text="@string/try_again"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_next"
@@ -65,12 +66,12 @@
     <TextView
         android:id="@+id/tv_header"
         style="@style/Text.Header"
-        android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="@string/prepare_your_selfie"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,13 +99,13 @@
         android:id="@+id/img_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/icon_selfie"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_tryagain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/selfie"
-        android:contentDescription="@string/icon_selfie" />
+        app:srcCompat="@drawable/selfie" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
