@@ -41,180 +41,212 @@
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_nik"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_nik" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_nik"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_nik" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_nama"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_nama" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_nama"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_nama" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_tempat_tgl_lahir"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_tempat_tgl_lahir" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_tempat_tgl_lahir"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_tempat_tgl_lahir" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_jenis_kelamin"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_jenis_kelamin" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_jenis_kelamin"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_jenis_kelamin" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_gol_darah"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_gol_darah" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_gol_darah"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_gol_darah" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_alamat"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_alamat" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_alamat"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_alamat" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
+                    android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
-                    android:text="@string/tv_rt_rw"
-                    style="@style/Text.SubHeader" />
+                    android:text="@string/tv_rt_rw" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_rt_rw"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_rt_rw" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
+                    android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
-                    android:text="@string/tv_kel_desa"
-                    style="@style/Text.SubHeader" />
+                    android:text="@string/tv_kel_desa" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_kel_desa"
-                    style="@style/Text.Description"/>
+                    android:text="@string/tv_kel_desa" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
+                    android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
-                    android:text="@string/tv_kecamatan"
-                    style="@style/Text.SubHeader" />
+                    android:text="@string/tv_kecamatan" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_kecamatan"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_kecamatan" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_agama"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_agama" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_agama"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_agama" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_status_perkawinan"
-                    style="@style/Text.SubHeader" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_status_perkawinan" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_status_perkawinan"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_status_perkawinan" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.SubHeader"
                     android:layout_column="1"
-                    android:text="@string/tv_pekerjaan"
-                    style="@style/Text.SubHeader" />
+                    android:text="@string/tv_pekerjaan" />
 
                 <TextView
+                    style="@style/Text.Description"
                     android:gravity="start"
-                    android:text="@string/tv_pekerjaan"
-                    style="@style/Text.Description" />
+                    android:text="@string/tv_pekerjaan" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
+                    style="@style/Text.TabKey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_column="1"
-                    android:text="@string/tv_kewarganegaraan"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppins_bold" />
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_kewarganegaraan" />
 
                 <TextView
+                    style="@style/Text.TabValue"
                     android:gravity="start"
-                    android:text="@string/tv_kewarganegaraan"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppins" />
+                    android:text="@string/tv_kewarganegaraan" />
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </ScrollView>

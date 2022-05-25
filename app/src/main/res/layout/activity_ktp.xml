@@ -9,22 +9,22 @@
     <TextView
         android:id="@+id/tvPrepareKTP"
         style="@style/Text.Title"
+        android:layout_marginTop="35dp"
         android:gravity="center"
         android:text="@string/prepare_your_ktp"
         android:textColor="@color/primary_blue"
-        android:layout_marginTop="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMakeSure"
-        android:layout_width="196dp"
         style="@style/Text.Description"
+        android:layout_width="196dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="@string/make_sure_your_ktp_card_is_in_good_condition"
         android:textColor="@color/light_grey"
-        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPrepareKTP" />
@@ -33,28 +33,28 @@
         android:id="@+id/ivScan"
         android:layout_width="312dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_scan_ktp"
         android:layout_marginTop="70dp"
-        app:layout_constraintTop_toBottomOf="@id/tvMakeSure"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/icon_scan"
+        android:src="@drawable/ic_scan_ktp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/icon_scan" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMakeSure" />
 
     <Button
         android:id="@+id/btnScan"
+        style="@style/Text.SubHeader"
         android:layout_width="230dp"
         android:layout_height="40dp"
-        style="@style/Text.SubHeader"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/start_scan_ktp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_button"
-        android:layout_marginTop="110dp"
-        android:text="@string/start_scan_ktp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivScan" />
 
-<!--    Scan Result-->
+    <!--    Scan Result-->
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/ivResult"
@@ -89,14 +89,14 @@
 
     <Button
         android:id="@+id/btnTryAgain"
+        style="@style/Text.SubHeader"
         android:layout_width="230dp"
         android:layout_height="40dp"
-        style="@style/Text.SubHeader"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/border_button"
+        android:text="@string/try_again"
         android:textAllCaps="false"
         android:textColor="@color/blue_button"
-        android:background="@drawable/border_button"
-        android:layout_marginTop="24dp"
-        android:text="@string/try_again"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,14 +104,14 @@
 
     <Button
         android:id="@+id/btnNext"
+        style="@style/Text.SubHeader"
         android:layout_width="230dp"
         android:layout_height="40dp"
-        style="@style/Text.SubHeader"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_button"
-        android:layout_marginTop="10dp"
-        android:text="@string/next"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
