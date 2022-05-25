@@ -85,11 +85,11 @@ class KtpActivity : AppCompatActivity() {
             )
             binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
-            binding.tvMakeSure.visibility = View.INVISIBLE
+//            binding.tvMakeSure.visibility = View.INVISIBLE
             binding.ivScan.visibility = View.INVISIBLE
             binding.btnScan.visibility = View.INVISIBLE
             binding.ivResult.visibility = View.VISIBLE
-            binding.linearLayout.visibility = View.VISIBLE
+//            binding.linearLayout.visibility = View.VISIBLE
             binding.btnTryAgain.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE
 

@@ -56,11 +56,11 @@ class SelfieActivity : AppCompatActivity() {
         }
 
         binding.btnStart.setOnClickListener { startCameraX() }
+        binding.btnTryagain.setOnClickListener{ startCameraX()}
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
             finish()
         }
-        binding.btnTryagain.setOnClickListener{ startCameraX()}
 
     }
 
