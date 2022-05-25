@@ -59,7 +59,7 @@
         style="@style/Text.Description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Position your smartphone horizontally"
+        android:text="@string/position_your_smartphone_horizontally"
         android:textColor="@color/white"
         android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"

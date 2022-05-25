@@ -53,10 +53,8 @@
 
     <Button
         android:id="@+id/btn_add"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
+        style="@style/Button.Large"
         android:layout_marginTop="120dp"
-        android:backgroundTint="@color/button_color"
         android:text="@string/add_verification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +62,7 @@
 
     <Button
         android:id="@+id/btn_status"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
+        style="@style/Button.Border"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:text="@string/status"

@@ -1,237 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <ImageView
-        android:id="@+id/img_status_ktp"
-        android:layout_width="270dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:contentDescription="@string/img_status_ktp"
-        android:src="@drawable/status_ktp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_status"
-        style="@style/Text.Header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/status"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_status_ktp" />
-
-    <TableLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:stretchColumns="2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status">
+        android:layout_height="wrap_content">
 
-        <TableRow>
+        <ImageView
+            android:id="@+id/img_status_ktp"
+            android:layout_width="270dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/img_status_ktp"
+            android:src="@drawable/status_ktp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_nik"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/Text.Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_status_ktp" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_nik"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:stretchColumns="2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status">
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_nama"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_nik"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_nama"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_nik"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_tempat_tgl_lahir"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_nama"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_tempat_tgl_lahir"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_nama"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_jenis_kelamin"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_tempat_tgl_lahir"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_jenis_kelamin"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_tempat_tgl_lahir"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_gol_darah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_jenis_kelamin"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_gol_darah"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_jenis_kelamin"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_alamat"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_gol_darah"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_alamat"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_gol_darah"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:paddingHorizontal="16dp"
-                android:text="@string/tv_rt_rw"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_alamat"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_rt_rw"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_alamat"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:paddingHorizontal="16dp"
-                android:text="@string/tv_kel_desa"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_rt_rw"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_kel_desa"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_rt_rw"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:paddingHorizontal="16dp"
-                android:text="@string/tv_kecamatan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_kel_desa"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_kecamatan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_kel_desa"
+                    style="@style/Text.Description"/>
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_agama"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_kecamatan"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_agama"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_kecamatan"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_status_perkawinan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_agama"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_status_perkawinan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_agama"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_pekerjaan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_status_perkawinan"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_pekerjaan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_status_perkawinan"
+                    style="@style/Text.Description" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <TextView
-                android:layout_column="1"
-                android:text="@string/tv_kewarganegaraan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_pekerjaan"
+                    style="@style/Text.SubHeader" />
 
-            <TextView
-                android:gravity="start"
-                android:text="@string/tv_kewarganegaraan"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_pekerjaan"
+                    style="@style/Text.Description" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_column="1"
+                    android:text="@string/tv_kewarganegaraan"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_bold" />
+
+                <TextView
+                    android:gravity="start"
+                    android:text="@string/tv_kewarganegaraan"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins" />
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
