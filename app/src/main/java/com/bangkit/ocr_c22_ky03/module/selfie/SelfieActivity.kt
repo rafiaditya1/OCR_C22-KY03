@@ -11,11 +11,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bangkit.ocr_c22_ky03.bitmapToFile
+import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.databinding.ActivitySelfieBinding
 import com.bangkit.ocr_c22_ky03.module.history.HistoryActivity
-import com.bangkit.ocr_c22_ky03.rotateBitmap
-import com.bangkit.ocr_c22_ky03.toSquare
+import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
+import com.bangkit.ocr_c22_ky03.utils.toSquare
 import com.bumptech.glide.Glide
 import java.io.File
 

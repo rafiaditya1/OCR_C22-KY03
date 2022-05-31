@@ -13,7 +13,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.bangkit.ocr_c22_ky03.createFile
+import com.bangkit.ocr_c22_ky03.utils.createFile
 import com.bangkit.ocr_c22_ky03.databinding.ActivityTakeSelfieBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
