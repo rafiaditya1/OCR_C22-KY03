@@ -1,16 +1,16 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.ktp
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Rational
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityScanBinding
 import com.bangkit.ocr_c22_ky03.utils.createFile
 import java.lang.Exception

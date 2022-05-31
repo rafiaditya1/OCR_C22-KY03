@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryActivity">
+    tools:context=".module.history.HistoryActivity">
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"

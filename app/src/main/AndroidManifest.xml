@@ -15,31 +15,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OCR_C22KY03">
         <activity
-            android:name=".SelfieActivity"
+            android:name=".module.selfie.SelfieActivity"
             android:exported="false" />
         <activity
-            android:name=".HistoryActivity"
+            android:name=".module.history.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".KtpResultActivity"
+            android:name=".module.ktp.ScanActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
+            android:name=".module.form.FormActivity"
             android:exported="false" />
         <activity
-            android:name=".FormActivity"
+            android:name=".module.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".module.ktp.KtpActivity"
             android:exported="false" />
         <activity
-            android:name=".KtpActivity"
+            android:name=".module.selfie.TakeSelfieActivity"
             android:exported="false" />
         <activity
-            android:name=".TakeSelfieActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".module.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>

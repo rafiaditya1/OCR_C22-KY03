@@ -1,8 +1,9 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.form
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bangkit.ocr_c22_ky03.module.selfie.SelfieActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityFormBinding
 
 class FormActivity : AppCompatActivity() {

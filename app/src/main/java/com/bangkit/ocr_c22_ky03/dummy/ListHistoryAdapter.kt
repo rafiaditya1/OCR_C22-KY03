@@ -28,23 +28,27 @@ class ListHistoryAdapter(private val listHero: ArrayList<Users>) :
         val hero = listHero[position]
         holder.tvName.text = hero.name
         holder.tvDate.text = hero.date
-        if (hero.status == "verified") {
-            Glide.with(holder.itemView.context)
-                .load(R.drawable.sts_verified)
-                .into(holder.status)
-        } else if (hero.status == "on process") {
-            Glide.with(holder.itemView.context)
-                .load(R.drawable.sts_process)
-                .into(holder.status)
+        when (hero.status) {
+            "verified" -> {
+                Glide.with(holder.itemView.context)
+                    .load(R.drawable.sts_verified)
+                    .into(holder.status)
+            }
+            "on process" -> {
+                Glide.with(holder.itemView.context)
+                    .load(R.drawable.sts_process)
+                    .into(holder.status)
 
-        } else {
-            Glide.with(holder.itemView.context)
-                .load(R.drawable.sts_rejected)
-                .into(holder.status)
+            }
+            else -> {
+                Glide.with(holder.itemView.context)
+                    .load(R.drawable.sts_rejected)
+                    .into(holder.status)
+            }
         }
-
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
         holder.btnDetail.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
-        }
+    }
 
 
     override fun getItemCount(): Int {

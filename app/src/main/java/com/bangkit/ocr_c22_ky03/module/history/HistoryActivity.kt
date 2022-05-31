@@ -1,11 +1,12 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.history
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.ocr_c22_ky03.module.detail.DetailActivity
+import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.dummy.ListHistoryAdapter
 import com.bangkit.ocr_c22_ky03.dummy.Users
 import com.bangkit.ocr_c22_ky03.dummy.UsersData

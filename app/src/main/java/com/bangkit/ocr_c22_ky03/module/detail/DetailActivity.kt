@@ -1,4 +1,4 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
