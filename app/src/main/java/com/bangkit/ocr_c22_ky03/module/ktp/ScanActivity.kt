@@ -1,16 +1,16 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.ktp
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Rational
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityScanBinding
 import com.bangkit.ocr_c22_ky03.utils.createFile
 import java.lang.Exception
@@ -53,7 +53,6 @@ class ScanActivity : AppCompatActivity() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-
         val photoFile = createFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -73,15 +72,16 @@ class ScanActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(this@ScanActivity, getString(R.string.take_picture_failed), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ScanActivity,
+                        getString(R.string.take_picture_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
         )
     }
-
-
-
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -101,7 +101,7 @@ class ScanActivity : AppCompatActivity() {
                     this,
                     cameraSelector,
                     preview,
-                    imageCapture,
+                    imageCapture
                 )
             } catch (exc: Exception) {
                 Toast.makeText(
@@ -125,4 +125,6 @@ class ScanActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
+
 }
+

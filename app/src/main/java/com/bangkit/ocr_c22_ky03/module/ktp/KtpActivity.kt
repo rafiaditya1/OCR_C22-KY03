@@ -1,38 +1,38 @@
-package com.bangkit.ocr_c22_ky03
+package com.bangkit.ocr_c22_ky03.module.ktp
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bangkit.ocr_c22_ky03.databinding.ActivitySelfieBinding
-import com.bumptech.glide.Glide
+import com.bangkit.ocr_c22_ky03.module.form.FormActivity
+import com.bangkit.ocr_c22_ky03.R
+import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import java.io.File
 
-class SelfieActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySelfieBinding
+class KtpActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityKtpBinding
     private var getFile: File? = null
+//    private lateinit var viewModel: UploadViewModel
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String>,
+        permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    "Tidak mendapatkan permission.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, getString(R.string.permission_denied), Toast.LENGTH_SHORT)
+                    .show()
                 finish()
             }
         }
@@ -42,11 +42,12 @@ class SelfieActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityKtpBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        binding = ActivitySelfieBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -55,17 +56,16 @@ class SelfieActivity : AppCompatActivity() {
             )
         }
 
-        binding.btnStart.setOnClickListener { startCameraX() }
+        binding.btnScan.setOnClickListener { startCameraX() }
+        binding.btnTryAgain.setOnClickListener { startCameraX() }
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, HistoryActivity::class.java))
-            finish()
+            intent = Intent(this@KtpActivity, FormActivity::class.java)
+            startActivity(intent)
         }
-        binding.btnTryagain.setOnClickListener{ startCameraX()}
-
     }
 
     private fun startCameraX() {
-        val intent = Intent(this, TakeSelfieActivity::class.java)
+        val intent = Intent(this, ScanActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
@@ -76,27 +76,23 @@ class SelfieActivity : AppCompatActivity() {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
-            val result =
-                rotateBitmap(
-                    BitmapFactory.decodeFile(myFile.path),
-                    isBackCamera
-                )
-            val resultCrop = result.toSquare()
-            getFile = bitmapToFile(resultCrop, application)
-            Glide.with(this)
-                .load(resultCrop)
-                .into(binding.previewImageView)
+            getFile = myFile
 
-            binding.apply {
-                tvHeader.visibility = View.GONE
-                imgPreview.visibility = View.GONE
-                btnStart.visibility = View.GONE
-                btnNext.visibility = View.VISIBLE
-                previewImageView.visibility = View.VISIBLE
-                btnTryagain.visibility = View.VISIBLE
-            }
+            val result = rotateBitmap(
+                BitmapFactory.decodeFile(myFile.path),
+                isBackCamera
+            )
+            binding.ivResult.setImageBitmap(result)
+            binding.tvPrepareKTP.visibility = View.INVISIBLE
+//            binding.tvMakeSure.visibility = View.INVISIBLE
+            binding.ivScan.visibility = View.INVISIBLE
+            binding.btnScan.visibility = View.INVISIBLE
+            binding.ivResult.visibility = View.VISIBLE
+//            binding.linearLayout.visibility = View.VISIBLE
+            binding.btnTryAgain.visibility = View.VISIBLE
+            binding.btnNext.visibility = View.VISIBLE
+
         }
-
     }
 
 
