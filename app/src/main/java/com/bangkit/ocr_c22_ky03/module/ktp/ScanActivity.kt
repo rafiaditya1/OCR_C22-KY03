@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -54,7 +53,6 @@ class ScanActivity : AppCompatActivity() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-
         val photoFile = createFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -95,7 +93,6 @@ class ScanActivity : AppCompatActivity() {
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
-            cameraProviderFuture.get().bind(preview, imageAnalyzer)
             imageCapture = ImageCapture.Builder().build()
 
             try {
@@ -104,7 +101,6 @@ class ScanActivity : AppCompatActivity() {
                     this,
                     cameraSelector,
                     preview,
-                    imageAnalyzer,
                     imageCapture
                 )
             } catch (exc: Exception) {
@@ -129,44 +125,6 @@ class ScanActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
-
-    private val imageAnalyzer by lazy {
-        ImageAnalysis.Builder()
-            .setTargetAspectRatio(AspectRatio.RATIO_16_9)
-            .build()
-            .also {
-                it.setAnalyzer(
-                    cameraExecutor,
-                    TextReaderAnalyzer(::onTextFound)
-                )
-            }
-    }
-
-    private fun onTextFound(foundText: String) {
-        Log.d(TAG, "We got new text: $foundText")
-    }
-
-    private fun ProcessCameraProvider.bind(
-        preview: Preview,
-        imageAnalyzer: ImageAnalysis
-    ) = try {
-        unbindAll()
-        bindToLifecycle(
-            this@ScanActivity,
-            CameraSelector.DEFAULT_BACK_CAMERA,
-            preview,
-            imageAnalyzer
-        )
-    } catch (ise: IllegalStateException) {
-        // Thrown if binding is not done from the main thread
-        Log.e(TAG, "Binding failed", ise)
-    }
-
-
-    private companion object {
-        val TAG: String = ScanActivity::class.java.simpleName
-    }
-
 
 }
 
