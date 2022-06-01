@@ -47,7 +47,6 @@ class KtpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //viewModel =
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
