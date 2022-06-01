@@ -6,12 +6,18 @@ import android.content.Context
 import android.graphics.*
 import android.net.Uri
 import android.os.Environment
+import android.view.View
 import com.bangkit.ocr_c22_ky03.R
 import java.io.*
 import java.nio.file.Files.createFile
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
+
+
+interface ApiCallbackString {
+    fun onResponse(success: Boolean, message: String)
+}
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
@@ -159,4 +165,12 @@ fun bitmapToFile(bitmap: Bitmap?, application: Application): File {
     fos.close()
 
     return photoFile
+}
+
+fun showLoading(isLoading: Boolean, view: View) {
+    if (isLoading) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.INVISIBLE
+    }
 }

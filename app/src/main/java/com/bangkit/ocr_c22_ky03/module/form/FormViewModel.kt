@@ -3,6 +3,10 @@ package com.bangkit.ocr_c22_ky03.module.form
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bangkit.ocr_c22_ky03.api.ApiConfig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FormViewModel : ViewModel() {
 
@@ -16,8 +20,24 @@ class FormViewModel : ViewModel() {
 
     }
 
-    fun setData() {
+    fun setData(
+        name: String,
+        nik: String
+    ) {
+        val client = ApiConfig().getApiService().postKtp(name, nik)
+        client.enqueue(object : Callback<FormResponse> {
+            override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
 
+                }
+            }
+
+            override fun onFailure(call: Call<FormResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }
