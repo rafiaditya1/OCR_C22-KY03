@@ -1,13 +1,16 @@
 package com.bangkit.ocr_c22_ky03.module.history
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DataKtpResponse(
 
 	@field:SerializedName("DataKtpResponse")
 	val items: List<DataKtpResponseItem?>? = null
-)
-
+) : Parcelable
+@Parcelize
 data class DataKtpResponseItem(
 
 	@field:SerializedName("agama")
@@ -57,4 +60,4 @@ data class DataKtpResponseItem(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+): Parcelable

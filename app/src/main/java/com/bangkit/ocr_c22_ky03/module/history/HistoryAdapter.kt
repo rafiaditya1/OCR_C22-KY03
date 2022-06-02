@@ -1,5 +1,6 @@
 package com.bangkit.ocr_c22_ky03.module.history
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ItemRowHistoryBinding
+import com.bangkit.ocr_c22_ky03.module.detail.DetailActivity
 import com.bangkit.ocr_c22_ky03.utils.DiffCallback
 import com.bumptech.glide.Glide
 
@@ -64,17 +66,17 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
                 tvName.text = history.name
                 tvDate.text = history.createdAt
 
-//                itemView.setOnClickListener {
+                btnDetail.setOnClickListener {
 //                    val optionsCompat: ActivityOptionsCompat =
 //                        ActivityOptionsCompat.makeSceneTransitionAnimation(
 //                            btnDetail.context as Activity,
 //                            Pair(imgImage, "profile"),
 //                            Pair(tvName, "name"),
 //                        )
-//                    val intent = Intent(itemView.context, DetailActivity::class.java)
-//                    intent.putExtra(DetailActivity.EXTRA_STORY, story)
-//                    itemView.context.startActivity(intent, optionsCompat.toBundle())
-//                }
+                    val intent = Intent(btnDetail.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_HISTORY, history)
+                    btnDetail.context.startActivity(intent)
+                }
 
 
             }
