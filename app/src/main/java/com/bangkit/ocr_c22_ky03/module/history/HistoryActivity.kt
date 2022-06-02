@@ -19,12 +19,6 @@ class HistoryActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this) {
             showLoading(it, binding.progressBar)
         }
-        setListStory()
-        adapter = HistoryAdapter()
-        binding.rvHistory.layoutManager = LinearLayoutManager(this)
-        binding.rvHistory.setHasFixedSize(true)
-        binding.rvHistory.adapter = adapter
-
 
     }
 
