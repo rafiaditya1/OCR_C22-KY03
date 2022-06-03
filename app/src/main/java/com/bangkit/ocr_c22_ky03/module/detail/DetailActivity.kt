@@ -16,7 +16,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        histoy = intent.getParcelableExtra(EXTRA_HISTORY)!!
+        histoy = intent.getParcelableExtra(DATA_KTP)!!
         viewmodel.setDetailStory(histoy)
         displayResult()
     }
@@ -44,6 +44,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_HISTORY = "extra_history"
+        const val DATA_KTP = "data_ktp"
     }
 }

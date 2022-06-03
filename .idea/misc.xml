@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/activity_scan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_selfie.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_row_history.xml" value="0.240625" />
       </map>
     </option>
   </component>
