@@ -3,6 +3,7 @@ package com.bangkit.ocr_c22_ky03.module.history
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,13 +22,17 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.refresh.setOnRefreshListener {
+            viewModel.listData.observe(this) {
+                setListStory(it)
+            }
+        }
         viewModel.isLoading.observe(this) {
             showLoading(it, binding.progressBar)
         }
         viewModel.listData.observe(this) {
             setListStory(it)
         }
-
     }
 
     private fun setListStory(listDataKtp: List<DataKtpResponseItem>) {
