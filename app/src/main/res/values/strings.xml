@@ -43,4 +43,5 @@
     <string name="preview">preview</string>
     <string name="frame">frame</string>
     <string name="capture">capture</string>
+    <string name="length_nik">NIK length must be 16 digits </string>
 </resources>

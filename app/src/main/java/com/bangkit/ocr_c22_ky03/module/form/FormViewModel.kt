@@ -1,5 +1,8 @@
 package com.bangkit.ocr_c22_ky03.module.form
 
+import android.content.ContentValues
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,9 +30,11 @@ class FormViewModel : ViewModel() {
         val client = ApiConfig().getApiService().postKtp(name, nik)
         client.enqueue(object : Callback<FormResponse> {
             override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val responseBody = response.body()
-
+                    Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
+                } else {
+                    // todo
                 }
             }
 

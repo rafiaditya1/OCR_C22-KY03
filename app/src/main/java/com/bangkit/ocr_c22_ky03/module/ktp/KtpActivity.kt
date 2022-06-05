@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +16,8 @@ import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
+import com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import java.io.File
 
@@ -22,6 +26,8 @@ class KtpActivity : AppCompatActivity() {
     private lateinit var binding: ActivityKtpBinding
     private var getFile: File? = null
 //    private lateinit var viewModel: UploadViewModel
+    private lateinit var customButton: CustomButton
+    private lateinit var customEditText: CustomEditText
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -56,12 +62,32 @@ class KtpActivity : AppCompatActivity() {
             )
         }
 
+        customButton = findViewById(R.id.btnScan)
+        customEditText = findViewById(R.id.edt_nik)
+
+        setMyButtonEnable()
+
+        customEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                setMyButtonEnable()
+            }
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
+
         binding.btnScan.setOnClickListener { startCameraX() }
         binding.btnTryAgain.setOnClickListener { startCameraX() }
         binding.btnNext.setOnClickListener {
             intent = Intent(this@KtpActivity, FormActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun setMyButtonEnable() {
+        val result = customEditText.text
+        customButton.isEnabled = result != null && result.toString().length == 16
     }
 
     private fun startCameraX() {

@@ -3,12 +3,15 @@ package com.bangkit.ocr_c22_ky03.module.form
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.module.selfie.SelfieActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityFormBinding
 
 class FormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormBinding
+//    private lateinit var viewModel: FormViewModel
+    private val viewModel by viewModels<FormViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +19,17 @@ class FormActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnFinish.setOnClickListener{
+            setData(name = "Seno", nik = "123451234")
             intent = Intent(this@FormActivity, SelfieActivity::class.java)
             startActivity(intent)
         }
+
+//        viewModel.setData(name = "Seno", nik = "123456789" ).observe(this)
+
+
+    }
+    fun setData(name: String, nik: String) {
+        viewModel.setData(name, nik)
     }
 
     companion object {
