@@ -28,7 +28,7 @@ class KtpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityKtpBinding
     private var getFile: File? = null
-    lateinit var result: Bitmap
+//    lateinit var result: Bitmap
 //    private lateinit var viewModel: UploadViewModel
 
     override fun onRequestPermissionsResult(
@@ -65,39 +65,16 @@ class KtpActivity : AppCompatActivity() {
         }
 
         binding.btnScan.setOnClickListener { startCameraX() }
-        binding.btnTryAgain.setOnClickListener { startCameraX() }
+//        binding.btnTryAgain.setOnClickListener { startCameraX() }
 //        binding.btnNext.setOnClickListener {
-            intent = Intent(this@KtpActivity, FormActivity::class.java)
-            intent.putExtra(FormActivity.DATA_KTP, result)
-            startActivity(intent)
+//            intent = Intent(this@KtpActivity, FormActivity::class.java)
+//            intent.putExtra(FormActivity.DATA_KTP, result)
+//            startActivity(intent)
 //        }
 
-        val fileName = "labels.txt"
-        val inputString = application.assets.open(fileName).bufferedReader().use { it.readText() }
-        val townList = inputString.split("\n")
 
-        binding.btnNext.setOnClickListener {
-            val resized: Bitmap = Bitmap.createScaledBitmap(result, 224, 224, true)
 
-            val model = MobilenetV110224Quant.newInstance(this)
 
-            val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
-
-            val tBuffer = TensorImage.fromBitmap(resized)
-            val byteBuffer = tBuffer.buffer
-            inputFeature0.loadBuffer(byteBuffer)
-
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-            val max = getMax(outputFeature0.floatArray)
-
-            intent = Intent(this@KtpActivity, FormActivity::class.java)
-            intent.putExtra(FormActivity.DATA_KTP, townList[max])
-            startActivity(intent)
-            model.close()
-        }
     }
 
     private fun getMax(arr: FloatArray): Int {
@@ -128,10 +105,14 @@ class KtpActivity : AppCompatActivity() {
 
             getFile = myFile
 
-            result = rotateBitmap(
+           val result = rotateBitmap(
                 BitmapFactory.decodeFile(myFile.path),
                 isBackCamera
             )
+
+
+
+
             binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
 //            binding.tvMakeSure.visibility = View.INVISIBLE
@@ -142,6 +123,35 @@ class KtpActivity : AppCompatActivity() {
             binding.btnTryAgain.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE
 
+
+
+            val fileName = "labels.txt"
+            val inputString = application.assets.open(fileName).bufferedReader().use { it.readText() }
+            val townList = inputString.split("\n")
+
+            binding.btnTryAgain.setOnClickListener {
+                val resized: Bitmap = Bitmap.createScaledBitmap(result, 224, 224, true)
+
+                val model = MobilenetV110224Quant.newInstance(this)
+
+                val inputFeature0 =
+                    TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+
+                val tBuffer = TensorImage.fromBitmap(resized)
+                val byteBuffer = tBuffer.buffer
+                inputFeature0.loadBuffer(byteBuffer)
+
+                val outputs = model.process(inputFeature0)
+                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+                val max = getMax(outputFeature0.floatArray)
+//
+//                intent = Intent(this@KtpActivity, FormActivity::class.java)
+//                intent.putExtra(FormActivity.DATA_KTP, townList[max])
+//                startActivity(intent)
+                binding.tvMakeSure.text = townList[max]
+                model.close()
+            }
         }
     }
 
