@@ -3,6 +3,7 @@ package com.bangkit.ocr_c22_ky03.module.ktp
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ class KtpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityKtpBinding
     private var getFile: File? = null
+    lateinit var result: Bitmap
 //    private lateinit var viewModel: UploadViewModel
 
     override fun onRequestPermissionsResult(
@@ -60,6 +62,7 @@ class KtpActivity : AppCompatActivity() {
         binding.btnTryAgain.setOnClickListener { startCameraX() }
         binding.btnNext.setOnClickListener {
             intent = Intent(this@KtpActivity, FormActivity::class.java)
+            intent.putExtra(FormActivity.DATA_KTP, result)
             startActivity(intent)
         }
     }
@@ -78,7 +81,7 @@ class KtpActivity : AppCompatActivity() {
 
             getFile = myFile
 
-            val result = rotateBitmap(
+            result = rotateBitmap(
                 BitmapFactory.decodeFile(myFile.path),
                 isBackCamera
             )
@@ -94,6 +97,7 @@ class KtpActivity : AppCompatActivity() {
 
         }
     }
+
 
 
     companion object {
