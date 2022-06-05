@@ -21,53 +21,56 @@ class FormActivity : AppCompatActivity() {
         binding = ActivityFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val predict = intent.getStringExtra(DATA_KTP)
+        binding.tvHasil.text = predict
+
 //        binding.btnFinish.setOnClickListener{
 //            intent = Intent(this@FormActivity, SelfieActivity::class.java)
 //            startActivity(intent)
 //        }
 
-        val dataKtp = MediaStore.Images.Media.getBitmap(this.contentResolver, Uri.parse(DATA_KTP))
-        val fileName = "labels.txt"
-        val inputString = application.assets.open(fileName).bufferedReader().use { it.readText() }
-        val townList = inputString.split("\n")
-
-        binding.btnPredict.setOnClickListener{
-            val resized: Bitmap = Bitmap.createScaledBitmap(dataKtp, 224, 224, true)
-
-            val model = MobilenetV110224Quant.newInstance(this)
-
-            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
-
-            val tBuffer = TensorImage.fromBitmap(resized)
-            val byteBuffer = tBuffer.buffer
-            inputFeature0.loadBuffer(byteBuffer)
-
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-            val max = getMax(outputFeature0.floatArray)
-
-            binding.tvHasil.text = townList[max]
-
-            model.close()
-        }
-
-
+//        val dataKtp = MediaStore.Images.Media.getBitmap(this.contentResolver, Uri.parse(DATA_KTP))
+//        val fileName = "labels.txt"
+//        val inputString = application.assets.open(fileName).bufferedReader().use { it.readText() }
+//        val townList = inputString.split("\n")
+//
+//        binding.btnPredict.setOnClickListener{
+//            val resized: Bitmap = Bitmap.createScaledBitmap(dataKtp, 224, 224, true)
+//
+//            val model = MobilenetV110224Quant.newInstance(this)
+//
+//            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+//
+//            val tBuffer = TensorImage.fromBitmap(resized)
+//            val byteBuffer = tBuffer.buffer
+//            inputFeature0.loadBuffer(byteBuffer)
+//
+//            val outputs = model.process(inputFeature0)
+//            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+//
+//            val max = getMax(outputFeature0.floatArray)
+//
+//            binding.tvHasil.text = townList[max]
+//
+//            model.close()
+//        }
+//
+//
     }
-
-    fun getMax(arr: FloatArray): Int {
-
-        var ind = 0
-        var min = 0.0f
-
-        for (i in 0..1000) {
-            if (arr[i]>min){
-                ind = i
-                min = arr[i]
-            }
-        }
-        return ind
-    }
+//
+//    fun getMax(arr: FloatArray): Int {
+//
+//        var ind = 0
+//        var min = 0.0f
+//
+//        for (i in 0..1000) {
+//            if (arr[i]>min){
+//                ind = i
+//                min = arr[i]
+//            }
+//        }
+//        return ind
+//    }
 
     companion object {
         val DATA_KTP = "data_ktp"

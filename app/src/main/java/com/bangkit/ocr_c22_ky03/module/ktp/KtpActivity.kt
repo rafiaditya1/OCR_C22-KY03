@@ -5,8 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,7 +17,11 @@ import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.ml.MobilenetV110224Quant
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 
 class KtpActivity : AppCompatActivity() {
@@ -60,11 +66,52 @@ class KtpActivity : AppCompatActivity() {
 
         binding.btnScan.setOnClickListener { startCameraX() }
         binding.btnTryAgain.setOnClickListener { startCameraX() }
-        binding.btnNext.setOnClickListener {
+//        binding.btnNext.setOnClickListener {
             intent = Intent(this@KtpActivity, FormActivity::class.java)
             intent.putExtra(FormActivity.DATA_KTP, result)
             startActivity(intent)
+//        }
+
+        val fileName = "labels.txt"
+        val inputString = application.assets.open(fileName).bufferedReader().use { it.readText() }
+        val townList = inputString.split("\n")
+
+        binding.btnNext.setOnClickListener {
+            val resized: Bitmap = Bitmap.createScaledBitmap(result, 224, 224, true)
+
+            val model = MobilenetV110224Quant.newInstance(this)
+
+            val inputFeature0 =
+                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+
+            val tBuffer = TensorImage.fromBitmap(resized)
+            val byteBuffer = tBuffer.buffer
+            inputFeature0.loadBuffer(byteBuffer)
+
+            val outputs = model.process(inputFeature0)
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+
+            val max = getMax(outputFeature0.floatArray)
+
+            intent = Intent(this@KtpActivity, FormActivity::class.java)
+            intent.putExtra(FormActivity.DATA_KTP, townList[max])
+            startActivity(intent)
+            model.close()
         }
+    }
+
+    private fun getMax(arr: FloatArray): Int {
+
+        var ind = 0
+        var min = 0.0f
+
+        for (i in 0..1000) {
+            if (arr[i]>min){
+                ind = i
+                min = arr[i]
+            }
+        }
+        return ind
     }
 
     private fun startCameraX() {
