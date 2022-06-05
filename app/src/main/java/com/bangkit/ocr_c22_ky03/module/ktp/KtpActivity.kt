@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.ml.MobilenetV110224Quant
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
@@ -130,12 +131,13 @@ class KtpActivity : AppCompatActivity() {
             val townList = inputString.split("\n")
 
             binding.btnTryAgain.setOnClickListener {
-                val resized: Bitmap = Bitmap.createScaledBitmap(result, 224, 224, true)
+                val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
+                val model = KtpTinyLite416.newInstance(this)
+                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416, 416, 3), DataType.FLOAT32)
 
-                val model = MobilenetV110224Quant.newInstance(this)
-
-                val inputFeature0 =
-                    TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+//                val model = MobilenetV110224Quant.newInstance(this)
+//                val inputFeature0 =
+//                    TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
 
                 val tBuffer = TensorImage.fromBitmap(resized)
                 val byteBuffer = tBuffer.buffer
@@ -145,10 +147,6 @@ class KtpActivity : AppCompatActivity() {
                 val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
                 val max = getMax(outputFeature0.floatArray)
-//
-//                intent = Intent(this@KtpActivity, FormActivity::class.java)
-//                intent.putExtra(FormActivity.DATA_KTP, townList[max])
-//                startActivity(intent)
                 binding.tvMakeSure.text = townList[max]
                 model.close()
             }
