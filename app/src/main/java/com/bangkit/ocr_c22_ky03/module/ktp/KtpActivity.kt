@@ -1,20 +1,17 @@
 package com.bangkit.ocr_c22_ky03.module.ktp
 
 import android.Manifest
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
@@ -22,8 +19,6 @@ import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import org.tensorflow.lite.task.vision.detector.Detection
-import org.tensorflow.lite.task.vision.detector.ObjectDetector
 import java.io.File
 
 class KtpActivity : AppCompatActivity() {
@@ -114,8 +109,6 @@ class KtpActivity : AppCompatActivity() {
             )
 
 
-
-
             binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
 //            binding.tvMakeSure.visibility = View.INVISIBLE
@@ -127,57 +120,28 @@ class KtpActivity : AppCompatActivity() {
             binding.btnNext.visibility = View.VISIBLE
 
 
+
+            val fileName = "labels.txt"
+            val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
+            val townList = inputString.split("\n")
             binding.btnTryAgain.setOnClickListener {
                 val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
-//                val model = KtpTinyLite416.newInstance(this)
-//                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
-//
-//                val tBuffer = TensorImage.fromBitmap(resized)
-//                val byteBuffer = tBuffer.buffer
-//                inputFeature0.loadBuffer(byteBuffer)
-//
-//                val outputs = model.process(inputFeature0)
-//                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-//                val max = getMax(outputFeature0.floatArray)
+                val model = KtpTinyLite416.newInstance(this)
+                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
 
-                binding.tvMakeSure.text = runObjectDetection(resized).toString()
+                val tBuffer = TensorImage.fromBitmap(resized)
+                val byteBuffer = tBuffer.buffer
+                inputFeature0.loadBuffer(byteBuffer)
+
+                val outputs = model.process(inputFeature0)
+                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+                val max = getMax(outputFeature0.floatArray)
+
+                binding.tvMakeSure.text = townList[max]
             }
         }
 
     }
-
-    private fun runObjectDetection(bitmap: Bitmap) {
-        val image = TensorImage.fromBitmap(bitmap)
-        val options = ObjectDetector.ObjectDetectorOptions.builder()
-            .setMaxResults(5)
-            .setScoreThreshold(0.5f)
-            .build()
-        val detector = ObjectDetector.createFromFileAndOptions(
-            this, // the application context
-            "ktp-tiny-lite-416.tflite", // must be same as the filename in assets folder
-            options
-        )
-        val results = detector.detect(image)
-        debugPrint(results)
-    }
-
-    private fun debugPrint(results : List<Detection>) {
-        for ((i, obj) in results.withIndex()) {
-            val box = obj.boundingBox
-
-            Log.d(TAG, "Detected object: ${i} ")
-            Log.d(TAG, "  boundingBox: (${box.left}, ${box.top}) - (${box.right},${box.bottom})")
-
-            for ((j, category) in obj.categories.withIndex()) {
-                Log.d(TAG, "    Label $j: ${category.label}")
-                val confidence: Int = category.score.times(100).toInt()
-                Log.d(TAG, "    Confidence: ${confidence}%")
-            }
-        }
-    }
-
-
-
 
 
     companion object {
