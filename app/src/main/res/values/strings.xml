@@ -43,4 +43,8 @@
     <string name="preview">preview</string>
     <string name="frame">frame</string>
     <string name="capture">capture</string>
+    <string name="information_title">title</string>
+    <string name="upload_success">sukses</string>
+    <string name="btn_continue">Continue</string>
+    <string name="upload_failed">gagal</string>
 </resources>
