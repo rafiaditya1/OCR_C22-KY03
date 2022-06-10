@@ -49,6 +49,7 @@
                     android:text="@string/tv_nik" />
 
                 <TextView
+                    android:id="@+id/tv_nik"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_nik" />
@@ -65,6 +66,7 @@
                     android:text="@string/tv_nama" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_nama" />
@@ -81,6 +83,7 @@
                     android:text="@string/tv_tempat_tgl_lahir" />
 
                 <TextView
+                    android:id="@+id/tv_birth"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_tempat_tgl_lahir" />
@@ -97,6 +100,7 @@
                     android:text="@string/tv_jenis_kelamin" />
 
                 <TextView
+                    android:id="@+id/tv_gender"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_jenis_kelamin" />
@@ -113,6 +117,7 @@
                     android:text="@string/tv_gol_darah" />
 
                 <TextView
+                    android:id="@+id/tv_blood"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_gol_darah" />
@@ -129,6 +134,7 @@
                     android:text="@string/tv_alamat" />
 
                 <TextView
+                    android:id="@+id/tv_address"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_alamat" />
@@ -196,6 +202,7 @@
                     android:text="@string/tv_agama" />
 
                 <TextView
+                    android:id="@+id/tv_religion"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_agama" />
@@ -212,6 +219,7 @@
                     android:text="@string/tv_status_perkawinan" />
 
                 <TextView
+                    android:id="@+id/tv_marital_sts"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_status_perkawinan" />
@@ -225,6 +233,7 @@
                     android:text="@string/tv_pekerjaan" />
 
                 <TextView
+                    android:id="@+id/tv_job"
                     style="@style/Text.Description"
                     android:gravity="start"
                     android:text="@string/tv_pekerjaan" />
@@ -241,6 +250,7 @@
                     android:text="@string/tv_kewarganegaraan" />
 
                 <TextView
+                    android:id="@+id/tv_citizenship"
                     style="@style/Text.TabValue"
                     android:gravity="start"
                     android:text="@string/tv_kewarganegaraan" />

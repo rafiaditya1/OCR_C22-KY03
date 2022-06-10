@@ -1,11 +1,18 @@
 package com.bangkit.ocr_c22_ky03.module.form
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.module.selfie.SelfieActivity
+import android.provider.MediaStore
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityFormBinding
+import com.bangkit.ocr_c22_ky03.ml.MobilenetV110224Quant
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+
 
 class FormActivity : AppCompatActivity() {
 

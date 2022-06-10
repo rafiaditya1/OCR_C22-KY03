@@ -27,7 +27,7 @@ class FormViewModel : ViewModel() {
         name: String,
         nik: String
     ) {
-        val client = ApiConfig().getApiService().postKtp(name, nik)
+        val client = ApiConfig.getApiService().postKtp(name, nik)
         client.enqueue(object : Callback<FormResponse> {
             override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
                 if (response.isSuccessful) {

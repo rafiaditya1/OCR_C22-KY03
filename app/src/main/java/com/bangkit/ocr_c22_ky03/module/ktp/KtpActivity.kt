@@ -3,6 +3,7 @@ package com.bangkit.ocr_c22_ky03.module.ktp
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,16 +17,19 @@ import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 
 class KtpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityKtpBinding
     private var getFile: File? = null
-//    private lateinit var viewModel: UploadViewModel
     private lateinit var customButton: CustomButton
     private lateinit var customEditText: CustomEditText
 
@@ -78,11 +82,30 @@ class KtpActivity : AppCompatActivity() {
         })
 
         binding.btnScan.setOnClickListener { startCameraX() }
-        binding.btnTryAgain.setOnClickListener { startCameraX() }
-        binding.btnNext.setOnClickListener {
-            intent = Intent(this@KtpActivity, FormActivity::class.java)
-            startActivity(intent)
+//        binding.btnTryAgain.setOnClickListener { startCameraX() }
+//        binding.btnNext.setOnClickListener {
+//            intent = Intent(this@KtpActivity, FormActivity::class.java)
+//            intent.putExtra(FormActivity.DATA_KTP, result)
+//            startActivity(intent)
+//        }
+
+
+
+
+    }
+
+    private fun getMax(arr: FloatArray): Int {
+
+        var ind = 0
+        var min = 0.0f
+
+        for (i in 0..1000) {
+            if (arr[i]>min){
+                ind = i
+                min = arr[i]
+            }
         }
+        return ind
     }
 
     private fun setMyButtonEnable() {
@@ -118,6 +141,26 @@ class KtpActivity : AppCompatActivity() {
             binding.btnTryAgain.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE
 
+
+
+            val fileName = "labels.txt"
+            val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
+            val townList = inputString.split("\n")
+            binding.btnTryAgain.setOnClickListener {
+                val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
+                val model = KtpTinyLite416.newInstance(this)
+                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
+
+                val tBuffer = TensorImage.fromBitmap(resized)
+                val byteBuffer = tBuffer.buffer
+                inputFeature0.loadBuffer(byteBuffer)
+
+                val outputs = model.process(inputFeature0)
+                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+                val max = getMax(outputFeature0.floatArray)
+
+                binding.tvMakeSure.text = townList[max]
+            }
         }
     }
 

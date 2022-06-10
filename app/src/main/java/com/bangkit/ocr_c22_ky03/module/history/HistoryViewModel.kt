@@ -18,7 +18,11 @@ class HistoryViewModel: ViewModel() {
     val listData: LiveData<List<DataKtpResponseItem>> = _listData
 
 
-    fun getData(){
+    init {
+        getData()
+    }
+
+    private fun getData(){
         _isLoading.value = true
         val client = ApiConfig.getApiService().getHistory()
         client.enqueue(object : Callback<List<DataKtpResponseItem>>{
