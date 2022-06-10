@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".module.detail.DetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_status_ktp"
+            android:layout_width="270dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/img_status_ktp"
+            android:src="@drawable/status_ktp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/Text.Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_status_ktp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:stretchColumns="2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_nik" />
+
+                <TextView
+                    android:id="@+id/tv_nik"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_nik" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_nama" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_nama" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_tempat_tgl_lahir" />
+
+                <TextView
+                    android:id="@+id/tv_birth"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_tempat_tgl_lahir" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_jenis_kelamin" />
+
+                <TextView
+                    android:id="@+id/tv_gender"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_jenis_kelamin" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_gol_darah" />
+
+                <TextView
+                    android:id="@+id/tv_blood"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_gol_darah" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_alamat" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_alamat" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_rt_rw" />
+
+                <TextView
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_rt_rw" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_kel_desa" />
+
+                <TextView
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_kel_desa" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/tv_kecamatan" />
+
+                <TextView
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_kecamatan" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_agama" />
+
+                <TextView
+                    android:id="@+id/tv_religion"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_agama" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_status_perkawinan" />
+
+                <TextView
+                    android:id="@+id/tv_marital_sts"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_status_perkawinan" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.SubHeader"
+                    android:layout_column="1"
+                    android:text="@string/tv_pekerjaan" />
+
+                <TextView
+                    android:id="@+id/tv_job"
+                    style="@style/Text.Description"
+                    android:gravity="start"
+                    android:text="@string/tv_pekerjaan" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text.TabKey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_kewarganegaraan" />
+
+                <TextView
+                    android:id="@+id/tv_citizenship"
+                    style="@style/Text.TabValue"
+                    android:gravity="start"
+                    android:text="@string/tv_kewarganegaraan" />
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

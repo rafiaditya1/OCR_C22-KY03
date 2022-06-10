@@ -4,27 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KtpActivity">
+    tools:context=".module.ktp.KtpActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvPrepareKTP"
-        style="@style/Text.Title"
-        android:gravity="center"
-        android:text="Prepare your KTP"
-        android:textColor="@color/primary_blue"
+        style="@style/Text.Header"
         android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="@string/prepare_your_ktp"
+        android:textColor="@color/primary_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMakeSure"
-        android:layout_width="196dp"
         style="@style/Text.Description"
-        android:gravity="center"
-        android:text="Make sure your KTP card is in good condition"
-        android:textColor="@color/light_grey"
+        android:layout_width="196dp"
         android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/make_sure_your_ktp_card_is_in_good_condition"
+        android:textColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPrepareKTP" />
@@ -33,84 +46,94 @@
         android:id="@+id/ivScan"
         android:layout_width="312dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_scan_ktp"
         android:layout_marginTop="70dp"
-        app:layout_constraintTop_toBottomOf="@id/tvMakeSure"
+        android:contentDescription="@string/icon_scan"
+        android:src="@drawable/ic_scan_ktp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tvMakeSure" />
 
-    <Button
-        android:id="@+id/btnScan"
-        android:layout_width="230dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="110dp"
-        android:background="@drawable/rounded_button"
-        android:text="Start scan KTP"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        style="@style/Text.SubHeader"
+    <com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
+        android:id="@+id/edt_nik"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_edit_text"
+        android:hint="Enter your NIK"
+        style="@style/Text.Description"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivScan" />
 
-<!--    Scan Result-->
+
+    <com.bangkit.ocr_c22_ky03.module.customView.CustomButton
+        android:id="@+id/btnScan"
+        style="@style/Text.SubHeader"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="110dp"
+        android:enabled="false"
+        android:background="@drawable/rounded_button"
+        android:text="@string/start_scan_ktp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivScan" />
+
+    <!--    Scan Result-->
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/ivResult"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="320dp"
+        android:layout_height="400dp"
         android:layout_margin="36dp"
         android:src="@drawable/ic_baseline_image_24"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvMakeSure" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="250dp"
-        android:layout_height="125dp"
-        android:background="@color/grey"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="125dp"-->
+<!--        android:background="@color/grey"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guideline2">-->
 
-        <TextView
-            style="@style/Text.SubHeader"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="Pastikan foto KTP jelas, tidak blur dan tidak glare" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            style="@style/Text.SubHeader"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/pastikan_foto_ktp_jelas_tidak_blur_dan_tidak_glare" />-->
+<!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/btnTryAgain"
-        android:layout_width="230dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/border_button"
-        android:text="Try Again"
-        android:textAllCaps="false"
-        android:textColor="@color/blue_button"
-        style="@style/Text.SubHeader"
+        style="@style/Button.Border"
+        app:backgroundTint="@null"
+        android:layout_marginTop="30dp"
+        android:text="@string/try_again"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/ivResult" />
 
     <Button
         android:id="@+id/btnNext"
+        style="@style/Text.SubHeader"
         android:layout_width="230dp"
-        android:layout_height="41dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_button"
-        android:text="Next"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        style="@style/Text.SubHeader"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

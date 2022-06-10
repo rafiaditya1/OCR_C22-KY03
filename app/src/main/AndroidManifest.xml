@@ -16,17 +16,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OCR_C22KY03">
         <activity
-            android:name=".KtpResultActivity"
+            android:name=".module.authentication.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
+            android:name=".module.authentication.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".module.selfie.SelfieActivity"
             android:exported="false" />
         <activity
-            android:name=".KtpActivity"
-            android:exported="true">
+            android:name=".module.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ktp.ScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.form.FormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.detail.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ktp.KtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.selfie.TakeSelfieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.main.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,17 +3,21 @@ package com.bangkit.ocr_c22_ky03.utils
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Matrix
+import android.graphics.*
 import android.net.Uri
 import android.os.Environment
+import android.view.View
 import com.bangkit.ocr_c22_ky03.R
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
+import java.nio.file.Files.createFile
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.min
+
+
+interface ApiCallbackString {
+    fun onResponse(status: String)
+}
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
@@ -81,3 +85,111 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
 
     return myFile
 }
+
+fun kropBitmap(bitmap: Bitmap): Bitmap? {
+    val matrix = Matrix()
+    matrix.postRotate(90f)
+    return Bitmap.createBitmap(
+        bitmap,
+        0,
+        0,
+        bitmap.width,
+        bitmap.height,
+        matrix,
+        true
+    )
+
+}
+
+fun Bitmap.toSquare():Bitmap?{
+    // get the small side of bitmap
+    val side = min(width,height)
+
+    // calculate the x and y offset
+    val xOffset = (width - side) /2
+    val yOffset = (height - side)/2
+
+    // create a square bitmap
+    // a square is closed, two dimensional shape with 4 equal sides
+    return Bitmap.createBitmap(
+        this, // source bitmap
+        xOffset, // x coordinate of the first pixel in source
+        yOffset, // y coordinate of the first pixel in source
+        side, // width
+        side // height
+    )
+}
+
+
+fun Bitmap.toSelfie(bitmap:Bitmap?):Bitmap?{
+    val squareBitmapWidth = min(width,height)
+    // Initialize a new instance of Bitmap
+    // Initialize a new instance of Bitmap
+    val dstBitmap = Bitmap.createBitmap(
+        squareBitmapWidth,  // Width
+        squareBitmapWidth,  // Height
+        Bitmap.Config.ARGB_8888 // Config
+    )
+    val canvas = Canvas(dstBitmap)
+    // Initialize a new Paint instance
+    // Initialize a new Paint instance
+    val paint = Paint()
+    paint.isAntiAlias = true
+    val rect = Rect(0, 0, squareBitmapWidth, squareBitmapWidth)
+    val rectF = RectF(rect)
+    canvas.drawOval(rectF, paint)
+    paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+    // Calculate the left and top of copied bitmap
+    // Calculate the left and top of copied bitmap
+    val left = ((squareBitmapWidth - width) / 2).toFloat()
+    val top = ((squareBitmapWidth - height) / 2).toFloat()
+    bitmap?.let { canvas.drawBitmap(it, left, top, paint) }
+    // Free the native object associated with this bitmap.
+    // Free the native object associated with this bitmap.
+    recycle()
+    // Return the circular bitmap
+    // Return the circular bitmap
+    return dstBitmap
+}
+
+fun bitmapToFile(bitmap: Bitmap?, application: Application): File {
+    val photoFile = createFile(application)
+    val bmpStream = ByteArrayOutputStream()
+
+    bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, bmpStream)
+    val bmpPicByteArray = bmpStream.toByteArray()
+
+    val fos = FileOutputStream(photoFile)
+    fos.write(bmpPicByteArray)
+    fos.flush()
+    fos.close()
+
+    return photoFile
+}
+
+fun showLoading(isLoading: Boolean, view: View) {
+    if (isLoading) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.INVISIBLE
+    }
+}
+fun reduceFileImage(file: File): File {
+    val bitmap = BitmapFactory.decodeFile(file.path)
+
+    var compressQuality = 100
+    var streamLength: Int
+
+    do {
+        val bmpStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+        val bmpPicByteArray = bmpStream.toByteArray()
+        streamLength = bmpPicByteArray.size
+        compressQuality -= 5
+    } while (streamLength > 1000000)
+
+    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+
+    return file
+}
+
