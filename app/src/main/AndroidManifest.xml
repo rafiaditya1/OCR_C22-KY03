@@ -16,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OCR_C22KY03">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".module.authentication.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".module.authentication.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".module.selfie.SelfieActivity"
