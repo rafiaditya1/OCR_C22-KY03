@@ -22,9 +22,7 @@ import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
 import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
-import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
-import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -41,7 +39,6 @@ class KtpActivity : AppCompatActivity() {
     private lateinit var customButton: CustomButton
     private lateinit var customEditText: CustomEditText
     private val viewModel by viewModels<KtpViewModel>()
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -95,16 +92,18 @@ class KtpActivity : AppCompatActivity() {
 
         binding.btnScan.setOnClickListener { startCameraX() }
         binding.btnTryAgain.setOnClickListener { startCameraX() }
-        binding.btnNext.setOnClickListener {
-//            intent = Intent(this@KtpActivity, FormActivity::class.java)
-//            startActivity(intent)
-            uploadImage()
 //        binding.btnTryAgain.setOnClickListener { startCameraX() }
 //        binding.btnNext.setOnClickListener {
 //            intent = Intent(this@KtpActivity, FormActivity::class.java)
 //            intent.putExtra(FormActivity.DATA_KTP, result)
 //            startActivity(intent)
+        binding.btnNext.setOnClickListener {
+//            intent = Intent(this@KtpActivity, FormActivity::class.java)
+//            startActivity(intent)
+            uploadImage()
+//
 //        }
+        }
     }
 
     private fun getMax(arr: FloatArray): Int {
@@ -134,7 +133,6 @@ class KtpActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 //            getFile = bitmapToFile(result, application)
@@ -155,7 +153,8 @@ class KtpActivity : AppCompatActivity() {
 
             val fileName = "labels.txt"
             val inputString =
-                application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
+                application.assets.open(fileName).bufferedReader()
+                    .use { file -> file.readText() }
             val townList = inputString.split("\n")
             binding.btnTryAgain.setOnClickListener {
                 val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
@@ -187,11 +186,7 @@ class KtpActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-            // upload image
             viewModel.uploadImage(imageMultipart, object : ApiCallbackString {
-                //                override fun onResponse(success: Boolean, result: String) {
-//                    showAlertDialog(success,result)
-//                }
                 override fun onResponse(status: String) {
                     if (status == "success") {
                         val a = true
@@ -233,7 +228,6 @@ class KtpActivity : AppCompatActivity() {
             }
         }
     }
-
 
     companion object {
         const val CAMERA_X_RESULT = 200
