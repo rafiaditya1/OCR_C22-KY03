@@ -5,13 +5,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.R
@@ -19,10 +21,17 @@ import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
+import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
+import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
+import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import com.bumptech.glide.Glide
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 class KtpActivity : AppCompatActivity() {
@@ -31,6 +40,8 @@ class KtpActivity : AppCompatActivity() {
     private var getFile: File? = null
     private lateinit var customButton: CustomButton
     private lateinit var customEditText: CustomEditText
+    private val viewModel by viewModels<KtpViewModel>()
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -83,6 +94,11 @@ class KtpActivity : AppCompatActivity() {
         })
 
         binding.btnScan.setOnClickListener { startCameraX() }
+        binding.btnTryAgain.setOnClickListener { startCameraX() }
+        binding.btnNext.setOnClickListener {
+//            intent = Intent(this@KtpActivity, FormActivity::class.java)
+//            startActivity(intent)
+            uploadImage()
 //        binding.btnTryAgain.setOnClickListener { startCameraX() }
 //        binding.btnNext.setOnClickListener {
 //            intent = Intent(this@KtpActivity, FormActivity::class.java)
@@ -119,14 +135,14 @@ class KtpActivity : AppCompatActivity() {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-
             getFile = myFile
+            val result = BitmapFactory.decodeFile(myFile.path)
+//            getFile = bitmapToFile(result, application)
 
-            val result = rotateBitmap(
-                BitmapFactory.decodeFile(myFile.path),
-                isBackCamera
-            )
-            binding.ivResult.setImageBitmap(result)
+            Glide.with(this)
+                .load(result)
+                .into(binding.ivResult)
+
             binding.tvPrepareKTP.visibility = View.INVISIBLE
 //            binding.tvMakeSure.visibility = View.INVISIBLE
             binding.ivScan.visibility = View.INVISIBLE
@@ -159,6 +175,65 @@ class KtpActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun uploadImage() {
+
+        if (getFile != null) {
+            val file = reduceFileImage(getFile as File)
+            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart = MultipartBody.Part.createFormData(
+                "ktp",
+                file.name,
+                requestImageFile
+            )
+
+            // upload image
+            viewModel.uploadImage(imageMultipart, object : ApiCallbackString {
+                //                override fun onResponse(success: Boolean, result: String) {
+//                    showAlertDialog(success,result)
+//                }
+                override fun onResponse(status: String) {
+                    if (status == "success") {
+                        val a = true
+                        showAlertDialog(a, status)
+                    } else {
+                        val a = false
+                        showAlertDialog(a, status)
+                    }
+
+                }
+
+            })
+
+        } else {
+//            showToast(this@AddStoryActivity, getString(R.string.error_file))
+        }
+    }
+
+    private fun showAlertDialog(param: Boolean, status: String) {
+        if (param) {
+            AlertDialog.Builder(this).apply {
+                setTitle(getString(R.string.information_title))
+                setMessage(getString(R.string.upload_success))
+                setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
+                    finish()
+                }
+                create()
+                show()
+            }
+        } else {
+            AlertDialog.Builder(this).apply {
+                setTitle(getString(R.string.information_title))
+                setMessage(getString(R.string.upload_failed) + ", $status")
+                setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
+                    binding.progressBar.visibility = View.GONE
+                }
+                create()
+                show()
+            }
+        }
+    }
+
 
     companion object {
         const val CAMERA_X_RESULT = 200
