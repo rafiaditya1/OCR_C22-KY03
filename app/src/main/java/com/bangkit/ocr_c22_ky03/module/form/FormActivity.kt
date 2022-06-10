@@ -1,23 +1,16 @@
 package com.bangkit.ocr_c22_ky03.module.form
 
-import android.graphics.Bitmap
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.module.selfie.SelfieActivity
-import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityFormBinding
-import com.bangkit.ocr_c22_ky03.ml.MobilenetV110224Quant
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
 
 class FormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormBinding
-//    private lateinit var viewModel: FormViewModel
     private val viewModel by viewModels<FormViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +23,9 @@ class FormActivity : AppCompatActivity() {
             intent = Intent(this@FormActivity, SelfieActivity::class.java)
             startActivity(intent)
         }
-
 //        viewModel.setData(name = "Seno", nik = "123456789" ).observe(this)
-
-
     }
-    fun setData(name: String, nik: String) {
+    private fun setData(name: String, nik: String) {
         viewModel.setData(name, nik)
     }
 

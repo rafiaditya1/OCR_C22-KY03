@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
@@ -74,9 +73,11 @@ class KtpActivity : AppCompatActivity() {
         customEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 setMyButtonEnable()
             }
+
             override fun afterTextChanged(s: Editable) {
             }
         })
@@ -88,19 +89,13 @@ class KtpActivity : AppCompatActivity() {
 //            intent.putExtra(FormActivity.DATA_KTP, result)
 //            startActivity(intent)
 //        }
-
-
-
-
     }
 
     private fun getMax(arr: FloatArray): Int {
-
         var ind = 0
         var min = 0.0f
-
         for (i in 0..1000) {
-            if (arr[i]>min){
+            if (arr[i] > min) {
                 ind = i
                 min = arr[i]
             }
@@ -142,14 +137,15 @@ class KtpActivity : AppCompatActivity() {
             binding.btnNext.visibility = View.VISIBLE
 
 
-
             val fileName = "labels.txt"
-            val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
+            val inputString =
+                application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
             val townList = inputString.split("\n")
             binding.btnTryAgain.setOnClickListener {
                 val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
                 val model = KtpTinyLite416.newInstance(this)
-                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
+                val inputFeature0 =
+                    TensorBuffer.createFixedSize(intArrayOf(1, 416, 416, 3), DataType.FLOAT32)
 
                 val tBuffer = TensorImage.fromBitmap(resized)
                 val byteBuffer = tBuffer.buffer
@@ -163,7 +159,6 @@ class KtpActivity : AppCompatActivity() {
             }
         }
     }
-
 
     companion object {
         const val CAMERA_X_RESULT = 200
