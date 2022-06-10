@@ -86,13 +86,7 @@ class KtpActivity : AppCompatActivity() {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
             getFile = myFile
-//            val result =
-//                rotateBitmap(
-//                    BitmapFactory.decodeFile(myFile.path),
-//                    isBackCamera
-//                )
             val result = BitmapFactory.decodeFile(myFile.path)
-
 //            getFile = bitmapToFile(result, application)
 
             Glide.with(this)

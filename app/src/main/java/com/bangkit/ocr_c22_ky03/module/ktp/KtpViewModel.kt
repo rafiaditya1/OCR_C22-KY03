@@ -19,7 +19,7 @@ class KtpViewModel : ViewModel() {
         callback: ApiCallbackString
     ) {
         _isLoading.value = true
-        val client = ApiConfig().getApiService()
+        val client = ApiConfig.getApiService()
             .postKtp2( imageMultipart)
         client.enqueue(object : Callback<UploadKtpResponse> {
             override fun onResponse(
