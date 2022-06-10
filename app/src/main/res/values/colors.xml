@@ -11,6 +11,7 @@
     <color name="blue_button_disable">#A9E3FF</color>
     <color name="primary_blue">#2DAEDD</color>
     <color name="grey">#BBBBBB</color>
+    <color name="grey_text">#8E8E8E</color>
     <color name="light_grey">#A4A4A4</color>
     <color name="button_color">#0094DB</color>
 </resources>

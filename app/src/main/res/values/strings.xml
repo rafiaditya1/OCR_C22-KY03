@@ -48,4 +48,18 @@
     <string name="btn_continue">Continue</string>
     <string name="upload_failed">gagal</string>
     <string name="length_nik">NIK length must be 16 digits </string>
+    <string name="length_password">Password must be more than 6 characters</string>
+    <string name="valid_email">Invalid email</string>
+    <string name="welcome">Welcome</string>
+    <string name="register_now">Register now</string>
+    <string name="name">Name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="email">Email</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="password">Password</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
 </resources>
