@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
-import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
+//import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
@@ -90,7 +90,7 @@ class KtpActivity : AppCompatActivity() {
 
 
     private fun startCameraX() {
-        val intent = Intent(this, ScanActivity::class.java)
+        val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
@@ -124,21 +124,21 @@ class KtpActivity : AppCompatActivity() {
             val fileName = "labels.txt"
             val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
             val townList = inputString.split("\n")
-            binding.btnTryAgain.setOnClickListener {
-                val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
-                val model = KtpTinyLite416.newInstance(this)
-                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
-
-                val tBuffer = TensorImage.fromBitmap(resized)
-                val byteBuffer = tBuffer.buffer
-                inputFeature0.loadBuffer(byteBuffer)
-
-                val outputs = model.process(inputFeature0)
-                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-                val max = getMax(outputFeature0.floatArray)
-
-                binding.tvMakeSure.text = townList[max]
-            }
+//            binding.btnTryAgain.setOnClickListener {
+//                val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
+//                val model = KtpTinyLite416.newInstance(this)
+//                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
+//
+//                val tBuffer = TensorImage.fromBitmap(resized)
+//                val byteBuffer = tBuffer.buffer
+//                inputFeature0.loadBuffer(byteBuffer)
+//
+//                val outputs = model.process(inputFeature0)
+//                val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+//                val max = getMax(outputFeature0.floatArray)
+//
+//                binding.tvMakeSure.text = townList[max]
+//            }
         }
 
     }
