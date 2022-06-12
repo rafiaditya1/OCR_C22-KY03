@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.ml.Detect
 //import com.bangkit.ocr_c22_ky03.ml.KtpTinyLite416
 import com.bangkit.ocr_c22_ky03.utils.rotateBitmap
 import org.tensorflow.lite.DataType
@@ -74,23 +75,23 @@ class KtpActivity : AppCompatActivity() {
 
     }
 
-    private fun getMax(arr: FloatArray): Int {
-
-        var ind = 0
-        var min = 0.0f
-
-        for (i in 0..1000) {
-            if (arr[i]>min){
-                ind = i
-                min = arr[i]
-            }
-        }
-        return ind
-    }
+//    private fun getMax(arr: FloatArray): Int {
+//
+//        var ind = 0
+//        var min = 0.0f
+//
+//        for (i in 0..1) {
+//            if (arr[i]>min){
+//                ind = i
+//                min = arr[i]
+//            }
+//        }
+//        return ind
+//    }
 
 
     private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
+        val intent = Intent(this, ScanActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
@@ -103,10 +104,10 @@ class KtpActivity : AppCompatActivity() {
 
             getFile = myFile
 
-           val result = rotateBitmap(
-                BitmapFactory.decodeFile(myFile.path),
-                isBackCamera
-            )
+           val result =
+                BitmapFactory.decodeFile(myFile.path)
+
+
 
 
             binding.ivResult.setImageBitmap(result)
@@ -119,15 +120,15 @@ class KtpActivity : AppCompatActivity() {
             binding.btnTryAgain.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE
 
-
-
-            val fileName = "labels.txt"
-            val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
-            val townList = inputString.split("\n")
+//
+//
+//            val fileName = "labels.txt"
+//            val inputString = application.assets.open(fileName).bufferedReader().use { file -> file.readText() }
+//            val townList = inputString.split("\n")
 //            binding.btnTryAgain.setOnClickListener {
-//                val resized: Bitmap = Bitmap.createScaledBitmap(result, 416, 416, true)
-//                val model = KtpTinyLite416.newInstance(this)
-//                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 416  , 416, 3), DataType.FLOAT32)
+//                val resized: Bitmap = Bitmap.createScaledBitmap(result, 600, 600, true)
+//                val model = Detect.newInstance(this)
+//                val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 300  , 300, 3), DataType.FLOAT32)
 //
 //                val tBuffer = TensorImage.fromBitmap(resized)
 //                val byteBuffer = tBuffer.buffer

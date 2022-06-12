@@ -38,6 +38,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityCameraBinding
+import com.bangkit.ocr_c22_ky03.module.history.HistoryActivity
 import com.bangkit.ocr_c22_ky03.utils.createFile
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
@@ -114,65 +115,39 @@ class CameraActivity : AppCompatActivity() {
         activityCameraBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(activityCameraBinding.root)
 
-        activityCameraBinding.cameraCaptureButton.setOnClickListener {
-//            takePhoto()
-//            // Disable all camera controls
-//            it.isEnabled = false
-//
-//            if (pauseAnalysis) {
-//                // If image analysis is in paused state, resume it
-//                pauseAnalysis = false
-//                activityCameraBinding.imagePredicted.visibility = View.GONE
-//
-//            } else {
-//                // Otherwise, pause image analysis and freeze image
-//                pauseAnalysis = true
-//                val matrix = Matrix().apply {
-//                    postRotate(imageRotationDegrees.toFloat())
-//                    if (isFrontFacing) postScale(-1f, 1f)
-//                }
-//                val uprightImage = Bitmap.createBitmap(
-//                    bitmapBuffer, 0, 0, bitmapBuffer.width, bitmapBuffer.height, matrix, true)
-//                activityCameraBinding.imagePredicted.setImageBitmap(uprightImage)
-//                activityCameraBinding.imagePredicted.visibility = View.VISIBLE
-//            }
-//
-//            // Re-enable camera controls
-//            it.isEnabled = true
-        }
     }
 
-//    private fun takePhoto() {
-//        val imageCapture = imageCapture ?: return
-//        val photoFile = createFile(application)
-//
-//        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-//        imageCapture.takePicture(
-//            outputOptions,
-//            ContextCompat.getMainExecutor(this),
-//            object : ImageCapture.OnImageSavedCallback {
-//                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-//                    val intent = Intent()
-//                    intent.putExtra("picture", photoFile)
-//                    intent.putExtra(
-//                        "isBackCamera",
-//                        cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
-//                    )
-//                    setResult(KtpActivity.CAMERA_X_RESULT, intent)
-//                    finish()
-//                }
-//
-//                override fun onError(exception: ImageCaptureException) {
-//                    Toast.makeText(
-//                        this@CameraActivity,
-//                        getString(R.string.take_picture_failed),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//
-//            }
-//        )
-//    }
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+        val photoFile = createFile(application)
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    val intent = Intent()
+                    intent.putExtra("picture", photoFile)
+                    intent.putExtra(
+                        "isBackCamera",
+                        lensFacing == CameraSelector.LENS_FACING_BACK
+                    )
+                    setResult(KtpActivity.CAMERA_X_RESULT, intent)
+                    finish()
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Toast.makeText(
+                        this@CameraActivity,
+                        getString(R.string.take_picture_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+        )
+    }
 
     override fun onDestroy() {
 
@@ -278,6 +253,10 @@ class CameraActivity : AppCompatActivity() {
             activityCameraBinding.boxPrediction.visibility = View.GONE
             activityCameraBinding.textPrediction.visibility = View.GONE
             return@post
+        } else {
+            intent = Intent(this@CameraActivity, KtpActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         // Location has to be mapped to our local coordinates
