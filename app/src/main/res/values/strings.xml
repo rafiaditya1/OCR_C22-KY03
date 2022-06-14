@@ -62,4 +62,10 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="filled">all field must be filled</string>
+    <string name="register_success">Register success</string>
+    <string name="register_failed">Register failed</string>
+    <string name="login_success">Login success</string>
+    <string name="login_failed">Login failed</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

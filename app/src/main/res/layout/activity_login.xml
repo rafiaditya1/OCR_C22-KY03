@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:alpha="0"
             android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:alpha="0"
             android:id="@+id/logToContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
             app:layout_constraintTop_toBottomOf="@id/logo" />
 
         <TextView
+            android:alpha="0"
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +73,7 @@
 
 
         <com.bangkit.ocr_c22_ky03.module.customView.EmailEditText
+            android:alpha="0"
             android:id="@+id/edt_email"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -81,6 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_email"/>
 
         <TextView
+            android:alpha="0"
             android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,6 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
         <com.bangkit.ocr_c22_ky03.module.customView.PasswordEditText
+            android:alpha="0"
             android:id="@+id/edt_password"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -106,6 +112,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_password"/>
 
         <com.bangkit.ocr_c22_ky03.module.customView.CustomButton
+            android:alpha="0"
             android:id="@+id/btn_login"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -116,6 +123,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
         <TextView
+            android:alpha="0"
             android:id="@+id/tv_dont_have_account"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -128,6 +136,7 @@
             app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
         <TextView
+            android:alpha="0"
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

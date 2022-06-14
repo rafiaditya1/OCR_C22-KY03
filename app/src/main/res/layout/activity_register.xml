@@ -39,11 +39,12 @@
             android:id="@+id/logo"
             android:layout_width="260dp"
             android:layout_height="72dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:src="@drawable/logo_traveloka_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/logo_ocr"
@@ -133,6 +134,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_password"/>
 
+        <TextView
+            android:id="@+id/tv_confPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="14sp"
+            android:text="@string/confirm_password"
+            android:textColor="@color/grey"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+
+        <com.bangkit.ocr_c22_ky03.module.customView.PasswordEditText
+            android:id="@+id/edt_confPassword"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_confPassword"/>
+
         <com.bangkit.ocr_c22_ky03.module.customView.CustomButton
             android:id="@+id/btn_register"
             android:layout_width="300dp"
@@ -141,7 +167,7 @@
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_confPassword" />
 
         <TextView
             android:id="@+id/tv_dont_have_account"

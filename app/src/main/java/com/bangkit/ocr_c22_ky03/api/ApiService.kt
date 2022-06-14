@@ -30,4 +30,15 @@ interface ApiService {
 //        @Field ("name") name:String,
 //        @Field ("nik") nik:String
     ): Call<UploadKtpResponse>
+
+    @FormUrlEncoded
+    @POST("register")
+    fun userRegister(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("confPassword") confPassword: String,
+    ) : Call<RegisterResponse>
+
+
 }
