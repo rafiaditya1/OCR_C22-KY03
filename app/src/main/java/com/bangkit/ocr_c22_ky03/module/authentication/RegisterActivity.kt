@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityRegisterBinding
+import com.bangkit.ocr_c22_ky03.utils.AuthCallbackString
 import com.bangkit.ocr_c22_ky03.utils.showLoading
 
 class RegisterActivity : AppCompatActivity() {
@@ -43,8 +44,13 @@ class RegisterActivity : AppCompatActivity() {
             val message = getString(R.string.filled)
             Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
         } else {
-            viewModel.register(name, email, password, confPassword)
-            Toast.makeText(this@RegisterActivity, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+            viewModel.register(name, email, password, confPassword, object : AuthCallbackString{
+                override fun onResponse(status: String, msg: String) {
+                    Toast.makeText(this@RegisterActivity, msg, Toast.LENGTH_LONG).show()
+                }
+
+            })
+//            Toast.makeText(this@RegisterActivity, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

@@ -18,6 +18,10 @@ import kotlin.math.min
 interface ApiCallbackString {
     fun onResponse(status: String)
 }
+interface AuthCallbackString {
+    fun onResponse(status: String, msg: String)
+}
+
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 

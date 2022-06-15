@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.ocr_c22_ky03.api.ApiConfig
 import com.bangkit.ocr_c22_ky03.api.RegisterResponse
 import com.bangkit.ocr_c22_ky03.module.ktp.KtpViewModel
+import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
+import com.bangkit.ocr_c22_ky03.utils.AuthCallbackString
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +24,7 @@ class RegisterViewModel : ViewModel() {
     private var _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun register(name: String, email: String, password: String, confPassword: String) {
+    fun register(name: String, email: String, password: String, confPassword: String, callback: AuthCallbackString) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().userRegister(name, email, password, confPassword)
         client.enqueue(object : Callback<RegisterResponse> {
@@ -33,7 +35,8 @@ class RegisterViewModel : ViewModel() {
                 _isLoading.value = false
                 val responseBody = response.body()
                 if (responseBody != null) {
-                    Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
+                    callback.onResponse("success", "Your account registered")
+                    Log.e(ContentValues.TAG, "onResponse: ${response.body()}")
                     Log.e(ContentValues.TAG, "onSukses: yele ")
                     print("sukses broo")
                 } else {

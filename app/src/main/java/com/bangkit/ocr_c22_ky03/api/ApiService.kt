@@ -40,5 +40,10 @@ interface ApiService {
         @Field("confPassword") confPassword: String,
     ) : Call<RegisterResponse>
 
+    @POST("auth")
+    fun userLogin(
+        @Field("email") email: String,
+        @Field("password") password: String,
+    ) : Call<LoginResponse>
 
 }
