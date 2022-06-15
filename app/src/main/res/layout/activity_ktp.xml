@@ -24,7 +24,7 @@
         style="@style/Text.Header"
         android:layout_marginTop="35dp"
         android:gravity="center"
-        android:text="@string/prepare_your_ktp"
+        android:text="KTP kamu sudah Valid"
         android:textColor="@color/primary_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
