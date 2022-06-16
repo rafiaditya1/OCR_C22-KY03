@@ -20,6 +20,7 @@ class UserPreference(context: Context) {
             .putString(EMAIL, "")
             .putInt(ID, 0)
             .putString(TOKEN, "token")
+            .putString(PATH, "")
             .apply()
     }
 

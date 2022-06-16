@@ -10,6 +10,9 @@ data class UploadKtpResponse(
 	@field:SerializedName("path")
 	val path: String? = null,
 
+	@field:SerializedName("name_file")
+	val name_file: String? = null,
+
 	@field:SerializedName("status")
 	val status: String? = null
 ) : Parcelable

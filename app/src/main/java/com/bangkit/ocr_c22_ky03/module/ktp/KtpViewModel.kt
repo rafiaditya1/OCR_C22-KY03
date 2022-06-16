@@ -1,7 +1,9 @@
 package com.bangkit.ocr_c22_ky03.module.ktp
 
 import android.content.ContentValues
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,10 +16,13 @@ import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URLEncoder
+import java.util.*
 
 class KtpViewModel : ViewModel() {
     private val _link = MutableLiveData<UploadKtpResponse>()
     val link: LiveData<UploadKtpResponse> = _link
+    val abcd = MutableLiveData<UploadKtpResponse>()
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -57,15 +62,32 @@ class KtpViewModel : ViewModel() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun postPath(
         preference: UserPreference
     ) {
-        val link = preference.preference.getString("path", "")
-        val client = ApiConfig.getMLApiService().postKtp(link.toString())
+        var link = preference.preference.getString("path", "").toString()
+        link = link?.replace(".jpg", "")
+        val ENCODED_HREF = URLEncoder.encode(link, "utf-8")
+
+        val string = "Some text"
+
+        // encode a string using Base64 encoder
+        val encoder: Base64.Encoder = Base64.getEncoder()
+        val encoded: String = encoder.encodeToString(link.toByteArray())
+        val encoded2: String = encoder.encodeToString(link.toByteArray())
+//        val ENCODED_HREF2 = URLEncoder.encode(encoded, "utf-8")
+        println("Encoded Data: $encoded")
+
+
+        Log.e("PATH", ENCODED_HREF.toString())
+        print("ini PATH "+ENCODED_HREF)
+        val client = ApiConfig.getMLApiService().postKtp(link)
         client.enqueue(object : Callback<FormResponse> {
             override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
                 if (response.isSuccessful) {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
+//                    abcd.postValue(response.body())
                 } else {
                     Log.e(ContentValues.TAG, "onFailure: ${response.toString()}")
                 }

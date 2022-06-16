@@ -79,9 +79,9 @@ class KtpActivity : AppCompatActivity() {
         binding.btnNext.setOnClickListener {
             uploadImage()
             viewModel.link.observe(this){
-                userPreference.preference.edit().putString("path", it.path)
+                userPreference.preference.edit().putString("path", it.name_file).apply()
             }
-            viewModel.postPath(userPreference)
+
         }
 
 
@@ -146,6 +146,7 @@ class KtpActivity : AppCompatActivity() {
                 setTitle(getString(R.string.information_title))
                 setMessage(getString(R.string.upload_success))
                 setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
+                    viewModel.postPath(userPreference)
                     finish()
                 }
                 create()

@@ -1,11 +1,13 @@
 package com.bangkit.ocr_c22_ky03.api
 
+import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
 import com.bangkit.ocr_c22_ky03.module.history.*
 import com.bangkit.ocr_c22_ky03.module.ktp.UploadKtpResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+
 
 interface ApiService {
 
@@ -37,9 +39,11 @@ interface ApiService {
         @Field("password") password: String,
     ): Call<LoginResponse>
 
-    @POST("?url={path}")
+@Multipart
+    @POST("{link}")
     fun postKtp(
-        @Path("path") path: String
+//        @Path("{link}",encoded = true) link: String,
+        @Part("") link: String
     ): Call<FormResponse>
 
 }
