@@ -21,6 +21,8 @@ class UserPreference(context: Context) {
             .apply()
     }
 
+
+
 //    fun getUserLogin() {
 //        val email = preference.getString(EMAIL, "")
 //        val token = preference.getString(TOKEN, "")
@@ -31,5 +33,6 @@ class UserPreference(context: Context) {
         const val EMAIL = "email"
         const val PASSWORD = "password"
         const val TOKEN = "token"
+        const val PATH = "path"
     }
 }
