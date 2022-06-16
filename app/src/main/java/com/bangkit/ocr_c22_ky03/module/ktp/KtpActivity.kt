@@ -17,7 +17,6 @@ import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
-import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
 import com.bumptech.glide.Glide
@@ -78,13 +77,11 @@ class KtpActivity : AppCompatActivity() {
 //            intent.putExtra(FormActivity.DATA_KTP, result)
 //            startActivity(intent)
         binding.btnNext.setOnClickListener {
-//            intent = Intent(this@KtpActivity, FormActivity::class.java)
-//            startActivity(intent)
             uploadImage()
             viewModel.link.observe(this){
                 userPreference.preference.edit().putString("path", it.path)
             }
-//        }
+            viewModel.postPath(userPreference)
         }
 
 

@@ -8,17 +8,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    @FormUrlEncoded
-    @POST("ktp")
-    fun postKtp(
-//        @Part ktp: MultipartBody.Part,
-    @Field ("name") name:String,
-    @Field ("nik") nik:String
-    ): Call<FormResponse>
 
     @GET("ktp")
     fun getHistory(
-    ) : Call<List<DataKtpResponseItem>>
+    ): Call<List<DataKtpResponseItem>>
 
     @Multipart
     @POST("upload/ktp")
@@ -35,13 +28,18 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("confPassword") confPassword: String,
-    ) : Call<RegisterResponse>
+    ): Call<RegisterResponse>
 
     @FormUrlEncoded
     @POST("auth")
     fun userLogin(
         @Field("email") email: String,
         @Field("password") password: String,
-    ) : Call<LoginResponse>
+    ): Call<LoginResponse>
+
+    @POST("?url={path}")
+    fun postKtp(
+        @Path("path") path: String
+    ): Call<FormResponse>
 
 }

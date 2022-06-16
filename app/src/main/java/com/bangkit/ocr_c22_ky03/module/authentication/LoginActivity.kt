@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
             viewModel.user.observe(this) { user ->
-                userPreference.setUserLogin(email, user.accessToken.toString())
+                userPreference.setUserLogin(email, user.accessToken.toString(), user.id)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             }
