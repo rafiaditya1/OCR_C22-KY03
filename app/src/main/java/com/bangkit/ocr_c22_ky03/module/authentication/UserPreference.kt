@@ -5,12 +5,19 @@ import android.content.SharedPreferences
 
 class UserPreference(context: Context) {
 
-    val preference: SharedPreferences = context.getSharedPreferences(LOGIN_SESSION, Context.MODE_PRIVATE)
+    val preference: SharedPreferences = context.getSharedPreferences("login_session", Context.MODE_PRIVATE)
 
     fun setUserLogin(email: String, token: String) {
         preference.edit()
-            .putString(EMAIL, email)
-            .putString(TOKEN, token)
+            .putString("email", email)
+            .putString("token", token)
+            .apply()
+    }
+
+    fun deleteUserLogin() {
+        preference.edit()
+            .putString("email", "")
+            .putString("token", "")
             .apply()
     }
 

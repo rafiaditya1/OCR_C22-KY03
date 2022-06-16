@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(a: Context) : ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private var _user = MutableLiveData<LoginResponse>()
     val user: LiveData<LoginResponse> = _user
@@ -26,8 +26,6 @@ class LoginViewModel(a: Context) : ViewModel() {
     private var _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
-//    private var _token = MutableLiveData<String>()
-//    val token: LiveData<String> = _token
 
     fun login(email: String, password: String) {
         _isLoading.value = true
@@ -54,5 +52,4 @@ class LoginViewModel(a: Context) : ViewModel() {
         })
     }
 
-    //fun getUserToken() =
 }

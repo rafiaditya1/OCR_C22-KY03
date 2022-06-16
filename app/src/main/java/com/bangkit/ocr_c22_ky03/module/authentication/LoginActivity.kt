@@ -23,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
         playAnimation()
         userPreference = UserPreference(this)
 
-        if (userPreference.preference.getString("email", "") != null) {
-            if (userPreference.preference.getString("token", "") != null) {
+        if (userPreference.preference.getString("email", "") != "") {
+            if (userPreference.preference.getString("token", "") != "") {
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             }
@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.edtPassword.toString()
             viewModel.login(email, password)
             viewModel.user.observe(this) { user ->
-                userPreference.setUserLogin(binding.edtEmail.toString(), user.accessToken.toString())
+                userPreference.setUserLogin(email, user.accessToken.toString())
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             }

@@ -38,6 +38,7 @@ interface ApiService {
         @Field("confPassword") confPassword: String,
     ) : Call<RegisterResponse>
 
+    @FormUrlEncoded
     @POST("auth")
     fun userLogin(
         @Field("email") email: String,
