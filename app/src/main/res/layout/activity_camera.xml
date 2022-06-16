@@ -23,6 +23,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:rotation="90"-->
+<!--        android:rotationX="90"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_detection"-->
+<!--            style="@style/Text.Header"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:text="Detect Your KTP!"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    </LinearLayout>-->
+
     <TextView
         android:id="@+id/tv_detection"
         style="@style/Text.Header"
@@ -30,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:rotation="90"
+        android:orientation="vertical"
         android:text="Detect Your KTP!"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
