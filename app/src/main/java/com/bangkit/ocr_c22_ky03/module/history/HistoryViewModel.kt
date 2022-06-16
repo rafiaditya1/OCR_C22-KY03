@@ -17,7 +17,6 @@ class HistoryViewModel: ViewModel() {
     private val _listData = MutableLiveData<List<DataKtpResponseItem>>()
     val listData: LiveData<List<DataKtpResponseItem>> = _listData
 
-
     init {
         getData()
     }
@@ -33,6 +32,15 @@ class HistoryViewModel: ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listData.postValue(response.body())
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
+                    Log.e(ContentValues.TAG, "Datane wis entuk lur")
                 } else {
                     Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                 }
@@ -41,6 +49,15 @@ class HistoryViewModel: ViewModel() {
             override fun onFailure(call: Call<List<DataKtpResponseItem>>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
+                Log.e(ContentValues.TAG, "Datane ora entuk lur")
             }
 
         })

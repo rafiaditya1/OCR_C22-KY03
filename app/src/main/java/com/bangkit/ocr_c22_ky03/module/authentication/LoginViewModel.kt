@@ -1,7 +1,9 @@
 package com.bangkit.ocr_c22_ky03.module.authentication
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +13,7 @@ import com.bangkit.ocr_c22_ky03.api.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Tag
 
 class LoginViewModel : ViewModel() {
 
@@ -36,18 +39,21 @@ class LoginViewModel : ViewModel() {
                 response: Response<LoginResponse>
             ) {
                 _isLoading.value = false
-                if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null) {
                     _user.value = response.body()
+                    Log.e(ContentValues.TAG, "onResponse: ${response.body()}")
                 } else {
                     _message.value = response.message()
                     _error.value = true
+                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 _isLoading.value = false
                 _message.value = t.message.toString()
-                _error.value = true
+                Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }

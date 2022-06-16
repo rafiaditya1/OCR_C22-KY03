@@ -1,8 +1,7 @@
 package com.bangkit.ocr_c22_ky03.api
 
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
-import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponse
-import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponseItem
+import com.bangkit.ocr_c22_ky03.module.history.*
 import com.bangkit.ocr_c22_ky03.module.ktp.UploadKtpResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -10,14 +9,14 @@ import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
-    @POST("dataktp")
+    @POST("ktp")
     fun postKtp(
 //        @Part ktp: MultipartBody.Part,
     @Field ("name") name:String,
     @Field ("nik") nik:String
     ): Call<FormResponse>
 
-    @GET("dataktp")
+    @GET("ktp")
     fun getHistory(
     ) : Call<List<DataKtpResponseItem>>
 

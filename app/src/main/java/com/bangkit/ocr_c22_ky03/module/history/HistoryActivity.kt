@@ -3,7 +3,7 @@ package com.bangkit.ocr_c22_ky03.module.history
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -40,16 +40,15 @@ class HistoryActivity : AppCompatActivity() {
         for (ktp in listDataKtp) {
             listUser.clear()
             listUser.addAll(listDataKtp)
+            Log.d("TAG", ktp.toString())
         }
-
+        adapter = HistoryAdapter(listUser)
         var layoutManager = LinearLayoutManager(this)
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             layoutManager = GridLayoutManager(this, 2)
         }
         binding.rvHistory.layoutManager = layoutManager
         binding.rvHistory.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
-
-        adapter = HistoryAdapter(listUser)
         binding.rvHistory.adapter = adapter
 
         adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback {
