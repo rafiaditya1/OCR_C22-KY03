@@ -24,7 +24,7 @@
         style="@style/Text.Header"
         android:layout_marginTop="35dp"
         android:gravity="center"
-        android:text="KTP kamu sudah Valid"
+        android:text="@string/title_validated"
         android:textColor="@color/primary_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,26 +53,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMakeSure" />
 
-    <com.bangkit.ocr_c22_ky03.module.customView.CustomEditText
-        android:id="@+id/edt_nik"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_edit_text"
-        android:hint="Enter your NIK"
-        style="@style/Text.Description"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivScan" />
-
-
     <com.bangkit.ocr_c22_ky03.module.customView.CustomButton
         android:id="@+id/btnScan"
         style="@style/Text.SubHeader"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="110dp"
-        android:enabled="false"
         android:background="@drawable/rounded_button"
         android:text="@string/start_scan_ktp"
         android:textAllCaps="false"
@@ -80,8 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivScan" />
-
-    <!--    Scan Result-->
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/ivResult"
@@ -94,32 +78,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMakeSure" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout"-->
-<!--        android:layout_width="250dp"-->
-<!--        android:layout_height="125dp"-->
-<!--        android:background="@color/grey"-->
-<!--        android:visibility="invisible"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/guideline2">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout"-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_height="125dp"-->
+    <!--        android:background="@color/grey"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/guideline2">-->
 
-<!--        <TextView-->
-<!--            style="@style/Text.SubHeader"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/pastikan_foto_ktp_jelas_tidak_blur_dan_tidak_glare" />-->
-<!--    </LinearLayout>-->
+    <!--        <TextView-->
+    <!--            style="@style/Text.SubHeader"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="@string/pastikan_foto_ktp_jelas_tidak_blur_dan_tidak_glare" />-->
+    <!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/btnTryAgain"
         style="@style/Button.Border"
-        app:backgroundTint="@null"
         android:layout_marginTop="30dp"
         android:text="@string/try_again"
         android:visibility="invisible"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivResult" />

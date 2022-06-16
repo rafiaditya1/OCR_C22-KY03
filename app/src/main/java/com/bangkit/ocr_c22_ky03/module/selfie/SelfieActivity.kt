@@ -103,7 +103,6 @@ class SelfieActivity : AppCompatActivity() {
 
     }
 
-
     companion object {
         const val CAMERA_X_RESULT = 200
 

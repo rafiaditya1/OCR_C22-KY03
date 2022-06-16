@@ -1,21 +1,5 @@
 package com.bangkit.ocr_c22_ky03.module.ktp
 
-/*
- * Copyright 2020 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -56,23 +40,13 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.min
 import kotlin.random.Random
 
-
-/** Activity that displays the camera and performs object detection on the incoming frames */
 class CameraActivity : AppCompatActivity() {
-    private var imageCapture: ImageCapture? = null
-//    val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
-
     private lateinit var activityCameraBinding: ActivityCameraBinding
-
     private lateinit var bitmapBuffer: Bitmap
-
     private val executor = Executors.newSingleThreadExecutor()
     private val permissions = listOf(Manifest.permission.CAMERA)
     private val permissionsRequestCode = Random.nextInt(0, 10000)
-
     private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
-    private val isFrontFacing get() = lensFacing == CameraSelector.LENS_FACING_FRONT
-
     private var pauseAnalysis = false
     private var imageRotationDegrees: Int = 0
     private val tfImageBuffer = TensorImage(DataType.FLOAT32)
@@ -81,21 +55,24 @@ class CameraActivity : AppCompatActivity() {
         val cropSize = minOf(bitmapBuffer.width, bitmapBuffer.height)
         ImageProcessor.Builder()
             .add(ResizeWithCropOrPadOp(cropSize, cropSize))
-            .add(ResizeOp(
-                tfInputSize.height, tfInputSize.width, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
-//            .add(Rot90Op(-imageRotationDegrees / 90))
+            .add(
+                ResizeOp(
+                    tfInputSize.height, tfInputSize.width, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR
+                )
+            )
             .add(NormalizeOp(0f, 1f))
             .build()
     }
 
-    private val nnApiDelegate by lazy  {
+    private val nnApiDelegate by lazy {
         NnApiDelegate()
     }
 
     private val tflite by lazy {
         Interpreter(
             FileUtil.loadMappedFile(this, MODEL_PATH),
-            Interpreter.Options().addDelegate(nnApiDelegate))
+            Interpreter.Options().addDelegate(nnApiDelegate)
+        )
     }
     private val detector by lazy {
         ObjectDetectionHelper(
@@ -115,38 +92,6 @@ class CameraActivity : AppCompatActivity() {
         activityCameraBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(activityCameraBinding.root)
 
-    }
-
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-        val photoFile = createFile(application)
-
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val intent = Intent()
-                    intent.putExtra("picture", photoFile)
-                    intent.putExtra(
-                        "isBackCamera",
-                        lensFacing == CameraSelector.LENS_FACING_BACK
-                    )
-                    setResult(KtpActivity.CAMERA_X_RESULT, intent)
-                    finish()
-                }
-
-                override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        getString(R.string.take_picture_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-            }
-        )
     }
 
     override fun onDestroy() {
@@ -169,7 +114,7 @@ class CameraActivity : AppCompatActivity() {
     private fun bindCameraUseCases() = activityCameraBinding.viewFinder.post {
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        cameraProviderFuture.addListener ({
+        cameraProviderFuture.addListener({
 
             // Camera provider is now guaranteed to be available
             val cameraProvider = cameraProviderFuture.get()
@@ -197,7 +142,8 @@ class CameraActivity : AppCompatActivity() {
                     // the analyzer has started running
                     imageRotationDegrees = image.imageInfo.rotationDegrees
                     bitmapBuffer = Bitmap.createBitmap(
-                        image.width, image.height, Bitmap.Config.ARGB_8888)
+                        image.width, image.height, Bitmap.Config.ARGB_8888
+                    )
                 }
 
                 // Early exit: image analysis is in paused state
@@ -207,10 +153,10 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 // Copy out RGB bits to our shared buffer
-                image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer)  }
+                image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
                 // Process the image in Tensorflow
-                val tfImage =  tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
+                val tfImage = tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
 
                 // Perform the object detection for the current frame
                 val predictions = detector.predict(tfImage)
@@ -225,7 +171,10 @@ class CameraActivity : AppCompatActivity() {
                     val now = System.currentTimeMillis()
                     val delta = now - lastFpsTimestamp
                     val fps = 1000 * frameCount.toFloat() / delta
-                    Log.d(TAG, "FPS: ${"%.02f".format(fps)} with tensorSize: ${tfImage.width} x ${tfImage.height}")
+                    Log.d(
+                        TAG,
+                        "FPS: ${"%.02f".format(fps)} with tensorSize: ${tfImage.width} x ${tfImage.height}"
+                    )
                     lastFpsTimestamp = now
                 }
             })
@@ -236,7 +185,8 @@ class CameraActivity : AppCompatActivity() {
             // Apply declared configs to CameraX using the same lifecycle owner
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
-                this as LifecycleOwner, cameraSelector, preview, imageAnalysis)
+                this as LifecycleOwner, cameraSelector, preview, imageAnalysis
+            )
 
             // Use the camera object to link our preview use case with the view
             preview.setSurfaceProvider(activityCameraBinding.viewFinder.surfaceProvider)
@@ -251,7 +201,6 @@ class CameraActivity : AppCompatActivity() {
         // Early exit: if prediction is not good enough, don't report it
         if (prediction == null || prediction.score < ACCURACY_THRESHOLD) {
             activityCameraBinding.boxPrediction.visibility = View.GONE
-            activityCameraBinding.textPrediction.visibility = View.GONE
             return@post
         } else {
             intent = Intent(this@CameraActivity, KtpActivity::class.java)
@@ -263,17 +212,21 @@ class CameraActivity : AppCompatActivity() {
         val location = mapOutputCoordinates(prediction.location)
 
         // Update the text and UI
-        activityCameraBinding.textPrediction.text = "${"%.2f".format(prediction.score)} ${prediction.label}"
         (activityCameraBinding.boxPrediction.layoutParams as ViewGroup.MarginLayoutParams).apply {
             topMargin = location.top.toInt()
             leftMargin = location.left.toInt()
-            width = min(activityCameraBinding.viewFinder.width, location.right.toInt() - location.left.toInt())
-            height = min(activityCameraBinding.viewFinder.height, location.bottom.toInt() - location.top.toInt())
+            width = min(
+                activityCameraBinding.viewFinder.width,
+                location.right.toInt() - location.left.toInt()
+            )
+            height = min(
+                activityCameraBinding.viewFinder.height,
+                location.bottom.toInt() - location.top.toInt()
+            )
         }
 
         // Make sure all UI elements are visible
         activityCameraBinding.boxPrediction.visibility = View.VISIBLE
-        activityCameraBinding.textPrediction.visibility = View.VISIBLE
     }
 
     /**
@@ -297,7 +250,8 @@ class CameraActivity : AppCompatActivity() {
                 activityCameraBinding.viewFinder.width - previewLocation.right,
                 previewLocation.top,
                 activityCameraBinding.viewFinder.width - previewLocation.left,
-                previewLocation.bottom)
+                previewLocation.bottom
+            )
         } else {
             previewLocation
         }
@@ -330,7 +284,8 @@ class CameraActivity : AppCompatActivity() {
         // Request permissions each time the app resumes, since they can be revoked at any time
         if (!hasPermissions(this)) {
             ActivityCompat.requestPermissions(
-                this, permissions.toTypedArray(), permissionsRequestCode)
+                this, permissions.toTypedArray(), permissionsRequestCode
+            )
         } else {
             bindCameraUseCases()
         }
@@ -357,7 +312,7 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private val TAG = CameraActivity::class.java.simpleName
 
-        private const val ACCURACY_THRESHOLD = 0.99f
+        private const val ACCURACY_THRESHOLD = 0.97f
         private const val MODEL_PATH = "detect.tflite"
         private const val LABELS_PATH = "labels.txt"
     }

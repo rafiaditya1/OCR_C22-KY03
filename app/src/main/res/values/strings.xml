@@ -68,4 +68,6 @@
     <string name="login_success">Login success</string>
     <string name="login_failed">Login failed</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="title_validated">Your KTP is Validated!</string>
+    <string name="validate_ktp_camera">Validate Your KTP!</string>
 </resources>

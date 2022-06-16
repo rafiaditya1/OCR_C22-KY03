@@ -21,10 +21,8 @@
             android:exported="false" />
         <activity
             android:name=".module.main.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".module.ktp.ValidateActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".module.selfie.SelfieActivity"
             android:exported="false" />
