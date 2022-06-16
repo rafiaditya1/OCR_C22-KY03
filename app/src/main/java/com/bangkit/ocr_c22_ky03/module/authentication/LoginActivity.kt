@@ -6,22 +6,44 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.databinding.ActivityLoginBinding
+import com.bangkit.ocr_c22_ky03.module.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         playAnimation()
+        userPreference = UserPreference(this)
+
+        if (userPreference.preference.getString("email", "") != null) {
+            if (userPreference.preference.getString("token", "") != null) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+            finish()
+        }
 
         binding.tvRegister.setOnClickListener {
             val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnLogin.setOnClickListener{
+            val email = binding.edtEmail.toString()
+            val password = binding.edtPassword.toString()
+            viewModel.login(email, password)
+            viewModel.user.observe(this) { user ->
+                userPreference.setUserLogin(binding.edtEmail.toString(), user.accessToken.toString())
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

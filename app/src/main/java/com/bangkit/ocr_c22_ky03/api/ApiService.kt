@@ -17,8 +17,6 @@ interface ApiService {
     @Field ("nik") nik:String
     ): Call<FormResponse>
 
-
-
     @GET("dataktp")
     fun getHistory(
     ) : Call<List<DataKtpResponseItem>>
