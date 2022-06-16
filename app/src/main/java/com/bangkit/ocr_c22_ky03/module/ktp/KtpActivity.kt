@@ -133,6 +133,8 @@ class KtpActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
+            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 //            getFile = bitmapToFile(result, application)
@@ -141,6 +143,9 @@ class KtpActivity : AppCompatActivity() {
                 .load(result)
                 .into(binding.ivResult)
 
+
+
+            binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
 //            binding.tvMakeSure.visibility = View.INVISIBLE
             binding.ivScan.visibility = View.INVISIBLE
