@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class FormResponse(
+data class Ktp2Response(
 
 	@field:SerializedName("nik")
 	val nik: String? = null,
@@ -19,24 +19,24 @@ data class FormResponse(
 	@field:SerializedName("pekerjaan")
 	val pekerjaan: String? = null,
 
-	@field:SerializedName("jenis")
-	val jenis: String? = null,
-
 	@field:SerializedName("agama")
 	val agama: String? = null,
+
+	@field:SerializedName("jenis")
+	val jenis: String? = null,
 
 	@field:SerializedName("ttl")
 	val ttl: String? = null,
 
 	@field:SerializedName("alamat")
-	val alamat: Alamat? = null,
+	val alamat: List<Alamat>? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
 ) : Parcelable
 
 @Parcelize
-data class Alamaat(
+data class Alamat(
 
 	@field:SerializedName("kel")
 	val kel: String? = null,

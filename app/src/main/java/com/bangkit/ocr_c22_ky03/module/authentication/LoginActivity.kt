@@ -6,10 +6,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.databinding.ActivityLoginBinding
 import com.bangkit.ocr_c22_ky03.module.history.HistoryActivity
 import com.bangkit.ocr_c22_ky03.module.main.MainActivity
+import com.bangkit.ocr_c22_ky03.utils.LoginCallbackString
 import com.bangkit.ocr_c22_ky03.utils.showLoading
 
 class LoginActivity : AppCompatActivity() {
@@ -41,9 +43,17 @@ class LoginActivity : AppCompatActivity() {
 //            startActivity(intent)
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
-            viewModel.login(email, password)
+            viewModel.login(email, password, object : LoginCallbackString{
+                override fun onResponse(msg: String) {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        msg,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
             viewModel.user.observe(this) { user ->
-                userPreference.setUserLogin(email, user.accessToken.toString())
+                userPreference.setUserLogin(email, user.accessToken.toString(), user.id)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             }

@@ -4,25 +4,32 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
+import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
-import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
+import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
+import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class KtpActivity : AppCompatActivity() {
 
@@ -30,6 +37,7 @@ class KtpActivity : AppCompatActivity() {
     private var getFile: File? = null
     private lateinit var customButton: CustomButton
     private val viewModel by viewModels<KtpViewModel>()
+    private lateinit var userPreference: UserPreference
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -54,6 +62,7 @@ class KtpActivity : AppCompatActivity() {
         binding = ActivityKtpBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        userPreference = UserPreference(this)
 
 
         if (!allPermissionsGranted()) {
@@ -74,11 +83,14 @@ class KtpActivity : AppCompatActivity() {
 //            intent.putExtra(FormActivity.DATA_KTP, result)
 //            startActivity(intent)
         binding.btnNext.setOnClickListener {
-//            intent = Intent(this@KtpActivity, FormActivity::class.java)
-//            startActivity(intent)
-            uploadImage()
-//        }
+            uploadImage(userPreference)
+            viewModel.link.observe(this){
+                userPreference.preference.edit().putString("path", it.name_file).apply()
+            }
+
         }
+
+
     }
 
     private fun startCameraX() {
@@ -95,6 +107,8 @@ class KtpActivity : AppCompatActivity() {
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 
+//            getFile = bitmapToFile(result, application)
+
             Glide.with(this)
                 .load(result)
                 .into(binding.ivResult)
@@ -109,18 +123,24 @@ class KtpActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage() {
+    private fun uploadImage( preference: UserPreference) {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            var userId = preference.preference.getInt("id", 0).toString()
+            val format = SimpleDateFormat("hh__ss", Locale.CANADA)
+            val now = Date()
+            val nameFile = "Ktp_"+userId.toString()
+
             val imageMultipart = MultipartBody.Part.createFormData(
-                "ktp",
-                file.name,
+             "ktp",
+                "${userId}_${file.name}",
                 requestImageFile
             )
-            viewModel.uploadImage(imageMultipart, object : ApiCallbackString {
-                override fun onResponse(status: String) {
+            viewModel.uploadImage(imageMultipart, object : UploadCallbackString {
+                override fun onResponse(status: String, path: String) {
                     if (status == "success") {
+                        Log.e("Bab", file.name.toString())
                         val a = true
                         showAlertDialog(a, status)
                     } else {
@@ -134,12 +154,14 @@ class KtpActivity : AppCompatActivity() {
         }
     }
 
+
     private fun showAlertDialog(param: Boolean, status: String) {
         if (param) {
             AlertDialog.Builder(this).apply {
                 setTitle(getString(R.string.information_title))
                 setMessage(getString(R.string.upload_success))
                 setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
+                    viewModel.postPath(userPreference)
                     finish()
                 }
                 create()

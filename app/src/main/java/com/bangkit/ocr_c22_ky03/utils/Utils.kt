@@ -22,6 +22,13 @@ interface AuthCallbackString {
     fun onResponse(status: String, msg: String)
 }
 
+interface LoginCallbackString {
+    fun onResponse(msg: String,)
+}
+
+interface UploadCallbackString {
+    fun onResponse(msg: String, path: String)
+}
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
