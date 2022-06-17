@@ -1,6 +1,7 @@
 package com.bangkit.ocr_c22_ky03.api
 
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
+import com.bangkit.ocr_c22_ky03.module.form.DataResponseItem
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
 import com.bangkit.ocr_c22_ky03.module.form.Ktp2Response
 import com.bangkit.ocr_c22_ky03.module.history.*
@@ -57,17 +58,17 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/ktp")
     fun setForm(
-        @Field("id") id: Int,
-        @Field("nik") nik: String,
+//        @Field("id") id: Int,
+//        @Field("nik") nik: String,
         @Field("name") nama: String,
-        @Field("tempat") tempat: String,
-        @Field("tgl_lahir") tgl_lahit: String,
-        @Field("jenis_kelamin") jenis_kelamin: String,
-        @Field("alamat") alamat: String,
-        @Field("agama") agama: String,
-        @Field("status_perkawinan") status_perkawinan: String,
-        @Field("pekerjaan") pekerjaan: String,
-        @Field("kewarganegaraan") kewarganegaraan: String,
-    ): Call<DataKtpResponseItem>
+//        @Field("tempat") tempat: String,
+//        @Field("tgl_lahir") tgl_lahit: String,
+//        @Field("jenis_kelamin") jenis_kelamin: String,
+//        @Field("alamat") alamat: String,
+//        @Field("agama") agama: String,
+//        @Field("status_perkawinan") status_perkawinan: String,
+//        @Field("pekerjaan") pekerjaan: String,
+//        @Field("kewarganegaraan") kewarganegaraan: String,
+    ): Call<DataResponseItem>
 
 }

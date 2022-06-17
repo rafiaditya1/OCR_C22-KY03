@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.ocr_c22_ky03.api.ApiConfig
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
-import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponseItem
+import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +24,8 @@ class FormViewModel : ViewModel() {
 
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+    private var _isLoading2 = MutableLiveData<Boolean>()
+    val isLoading2: LiveData<Boolean> = _isLoading2
 
     private var _message = MutableLiveData<Boolean>()
     val message: LiveData<Boolean> = _message
@@ -53,7 +55,7 @@ class FormViewModel : ViewModel() {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
                     _dataKtp.postValue(response.body())
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure1: ${response.toString()}")
+                    Log.e(ContentValues.TAG, "onFailure1: $response")
                 }
             }
 
@@ -66,47 +68,56 @@ class FormViewModel : ViewModel() {
     }
 
     fun setData(
-        preference: UserPreference,
-        nik: String,
+//        preference: UserPreference,
+//        nik: String,
         nama: String,
-        tempat: String,
-        tgl_lahir: String,
-        jenis_kelamin: String,
-        alamat: String,
-        agama: String,
-        status_perkawinan: String,
-        pekerjaan: String,
-        kewarganegaraan: String
+//        tempat: String,
+//        tgl_lahir: String,
+//        jenis_kelamin: String,
+////        alamat: String,
+//        agama: String,
+//        status_perkawinan: String,
+//        pekerjaan: String,
+//        kewarganegaraan: String,
+        callback: ApiCallbackString
     ) {
-        val idKtp = preference.preference.getInt("id", 0)
+        _isLoading2.value = true
+//        val idKtp = preference.preference.getInt("id", 0)
+        val a: Int = 100
+
         val client = ApiConfig.getApiService().setForm(
-            idKtp, nik, nama, tempat, tgl_lahir,
-            jenis_kelamin, alamat, agama, status_perkawinan,
-            pekerjaan, kewarganegaraan
+//            a, nik,
+            nama
+//            tempat, tgl_lahir,
+//            jenis_kelamin, agama, status_perkawinan,
+//            pekerjaan, kewarganegaraan
         )
-        client.enqueue(object : Callback<DataKtpResponseItem> {
+        client.enqueue(object : Callback<DataResponseItem> {
             override fun onResponse(
-                call: Call<DataKtpResponseItem>,
-                response: Response<DataKtpResponseItem>
+                call: Call<DataResponseItem>,
+                response: Response<DataResponseItem>
             ) {
+                _isLoading2.value = false
+
                 if (response.isSuccessful) {
-                    Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
-                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
-                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
-                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
+                    val responseBody = response.body()
+                    callback.onResponse(response.body().toString())
+                    if (responseBody != null) {
+                        Log.e("TAG", "onSukses: yele ")
+                        print("sukses broo")
+//                        print(message)
+                    }
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
-                    Log.e(ContentValues.TAG, "Gagal Upload Data")
-                    Log.e(ContentValues.TAG, "gagal Upload Data")
-                    Log.e(ContentValues.TAG, "gagal Upload Data")
+                    val e = Log.e("TAG", "onFailure: ${response.message()}")
+
                 }
+
             }
 
-            override fun onFailure(call: Call<DataKtpResponseItem>, t: Throwable) {
-                Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
-                Log.e(ContentValues.TAG, "gagal Upload Data")
-                Log.e(ContentValues.TAG, "gagal Upload Data")
-                Log.e(ContentValues.TAG, "gagal Upload Data")
+            override fun onFailure(call: Call<DataResponseItem>, t: Throwable) {
+                _isLoading.value = false
+                Log.e("TAG2", "onFailure: ${t.message}")
+                callback.onResponse(t.message.toString())
             }
         })
     }

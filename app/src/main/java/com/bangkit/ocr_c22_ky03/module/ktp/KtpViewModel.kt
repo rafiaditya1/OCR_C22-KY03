@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.ocr_c22_ky03.api.ApiConfig
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
-import com.bangkit.ocr_c22_ky03.utils.ApiCallbackString
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -81,7 +80,7 @@ class KtpViewModel : ViewModel() {
 
         Log.e("PATH", a)
         Log.e("PATH ENCODED", link)
-        print("ini PATH "+link)
+        print("ini PATH " + link)
         val client = ApiConfig.getMLApiService().postKtp(link)
         client.enqueue(object : Callback<FormResponse> {
             override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
@@ -89,9 +88,10 @@ class KtpViewModel : ViewModel() {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
 //                    abcd.postValue(response.body())
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.toString()}")
+                    Log.e(ContentValues.TAG, "onFailure: $response")
                 }
             }
+
             override fun onFailure(call: Call<FormResponse>, t: Throwable) {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
             }
