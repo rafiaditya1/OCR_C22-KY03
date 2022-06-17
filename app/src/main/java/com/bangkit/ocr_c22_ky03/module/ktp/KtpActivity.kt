@@ -4,12 +4,14 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,13 +21,16 @@ import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
+import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
+import com.bangkit.ocr_c22_ky03.utils.toSquare
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 class KtpActivity : AppCompatActivity() {
 
@@ -85,6 +90,8 @@ class KtpActivity : AppCompatActivity() {
             }
 
         }
+
+
     }
 
     private fun startCameraX() {
@@ -144,6 +151,7 @@ class KtpActivity : AppCompatActivity() {
 //            showToast(this@AddStoryActivity, getString(R.string.error_file))
         }
     }
+
 
     private fun showAlertDialog(param: Boolean, status: String) {
         if (param) {

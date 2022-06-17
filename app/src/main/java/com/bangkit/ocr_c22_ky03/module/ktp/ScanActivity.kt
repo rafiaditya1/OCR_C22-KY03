@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Size
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -93,7 +94,7 @@ class ScanActivity : AppCompatActivity() {
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
-            imageCapture = ImageCapture.Builder().build()
+            imageCapture = ImageCapture.Builder().setTargetResolution(Size(480,854)).build()
 
             try {
                 cameraProvider.unbindAll()
