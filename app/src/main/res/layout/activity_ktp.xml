@@ -70,7 +70,7 @@
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/ivResult"
         android:layout_width="320dp"
-        android:layout_height="400dp"
+        android:layout_height="320dp"
         android:layout_margin="36dp"
         android:src="@drawable/ic_baseline_image_24"
         android:visibility="invisible"

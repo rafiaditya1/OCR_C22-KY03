@@ -107,8 +107,6 @@ class KtpActivity : AppCompatActivity() {
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 
-//            getFile = bitmapToFile(result, application)
-
             Glide.with(this)
                 .load(result)
                 .into(binding.ivResult)
@@ -123,7 +121,7 @@ class KtpActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage( preference: UserPreference) {
+    private fun uploadImage() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
@@ -133,8 +131,8 @@ class KtpActivity : AppCompatActivity() {
             val nameFile = "Ktp_"+userId.toString()
 
             val imageMultipart = MultipartBody.Part.createFormData(
-             "ktp",
-                "${userId}_${file.name}",
+                "ktp",
+                file.name,
                 requestImageFile
             )
             viewModel.uploadImage(imageMultipart, object : UploadCallbackString {
@@ -153,7 +151,6 @@ class KtpActivity : AppCompatActivity() {
 //            showToast(this@AddStoryActivity, getString(R.string.error_file))
         }
     }
-
 
     private fun showAlertDialog(param: Boolean, status: String) {
         if (param) {

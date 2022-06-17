@@ -23,7 +23,17 @@ class FormActivity : AppCompatActivity() {
 
         val nik = binding.edtNik.text.toString()
         val nama = binding.edtNama.text.toString()
+        val tempatTanggalLahir = binding.edtTempatTglLahir.text.toString()
+        val jenisKelamin = binding.edtJenisKelamin.text.toString()
+        val golDarah = binding.edtGolDarah.text.toString()
+        val alamat = binding.edtAlamat.text.toString()
+        val rtRw = binding.edtRtRw.text.toString()
+        val kelDesa = binding.edtKelDesa.text.toString()
+        val kelurahan = binding.edtKecamatan.text.toString()
         val agama = binding.edtAgama.text.toString()
+        val status = binding.edtStatusPerkawinan.text.toString()
+        val pekrjaan = binding.edtPekerjaan.text.toString()
+        val kewarganegaraan = binding.edtKewarganegaraan.text.toString()
 
         viewModel.dataKtp.observe(this) {
             val nik = it.nik.toString()

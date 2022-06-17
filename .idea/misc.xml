@@ -25,9 +25,11 @@
         <entry key="app/src/main/res/layout/activity_history.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/activity_ktp.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_ktp_result.xml" value="0.26510416666666664" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/activity_scan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_selfie.xml" value="0.25" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1955" />
       </map>
     </option>
   </component>
