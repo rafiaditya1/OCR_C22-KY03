@@ -28,22 +28,22 @@ data class FormResponse(
 	@field:SerializedName("ttl")
 	val ttl: String? = null,
 
-	@field:SerializedName("alamat")
-	val alamat: Alamat? = null,
+//	@field:SerializedName("alamat")
+//	val alamat: Alamat? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
 ) : Parcelable
 
-@Parcelize
-data class Alamaat(
-
-	@field:SerializedName("kel")
-	val kel: String? = null,
-
-	@field:SerializedName("kec")
-	val kec: String? = null,
-
-	@field:SerializedName("alamat")
-	val alamat: String? = null
-) : Parcelable
+//@Parcelize
+//data class Alamaat(
+//
+//	@field:SerializedName("kel")
+//	val kel: String? = null,
+//
+//	@field:SerializedName("kec")
+//	val kec: String? = null,
+//
+//	@field:SerializedName("alamat")
+//	val alamat: String? = null
+//) : Parcelable

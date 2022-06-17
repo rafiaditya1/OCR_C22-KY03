@@ -20,6 +20,7 @@ import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
+import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
 import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
@@ -160,6 +161,8 @@ class KtpActivity : AppCompatActivity() {
                 setMessage(getString(R.string.upload_success))
                 setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
                     viewModel.postPath(userPreference)
+                    val intent = Intent(this@KtpActivity, FormActivity::class.java)
+                    startActivity(intent)
                     finish()
                 }
                 create()

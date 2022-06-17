@@ -29,7 +29,9 @@ class FormViewModel : ViewModel() {
     val message: LiveData<Boolean> = _message
 
     fun getData(preference: UserPreference) {
+        _isLoading.value = true
         val a = preference.preference.getString("path", "").toString()
+        val b = "a3RwXzg5LmpwZw=="
         val ENCODED_HREF = URLEncoder.encode(a, "utf-8")
         val string = "Some text"
         // encode a string using Base64 encoder
@@ -42,19 +44,22 @@ class FormViewModel : ViewModel() {
         Log.e("PATH", a)
         Log.e("PATH ENCODED", link)
         print("ini PATH " + link)
-        val client = ApiConfig.getMLApiService().getKtp(link)
+        val client = ApiConfig.getMLApiService().getKtp(b)
         client.enqueue(object : Callback<Ktp2Response> {
             override fun onResponse(call: Call<Ktp2Response>, response: Response<Ktp2Response>) {
+
+                _isLoading.value = false
                 if (response.isSuccessful) {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
                     _dataKtp.postValue(response.body())
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.toString()}")
+                    Log.e(ContentValues.TAG, "onFailure1: ${response.toString()}")
                 }
             }
 
             override fun onFailure(call: Call<Ktp2Response>, t: Throwable) {
-                Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                _isLoading.value = false
+                Log.e(ContentValues.TAG, "onFailure2: ${t.message.toString()}")
             }
 
         })
