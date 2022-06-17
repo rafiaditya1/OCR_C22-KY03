@@ -86,13 +86,22 @@ class FormViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
+                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
+                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
+                    Log.e(ContentValues.TAG, "Berhasil Upload Data")
                 } else {
                     Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    Log.e(ContentValues.TAG, "Gagal Upload Data")
+                    Log.e(ContentValues.TAG, "gagal Upload Data")
+                    Log.e(ContentValues.TAG, "gagal Upload Data")
                 }
             }
 
             override fun onFailure(call: Call<DataKtpResponseItem>, t: Throwable) {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
+                Log.e(ContentValues.TAG, "gagal Upload Data")
+                Log.e(ContentValues.TAG, "gagal Upload Data")
+                Log.e(ContentValues.TAG, "gagal Upload Data")
             }
         })
     }
