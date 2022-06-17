@@ -2,7 +2,8 @@ package com.bangkit.ocr_c22_ky03.module.form
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class Ktp2Response(

@@ -2,6 +2,7 @@ package com.bangkit.ocr_c22_ky03.api
 
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
+import com.bangkit.ocr_c22_ky03.module.form.Ktp2Response
 import com.bangkit.ocr_c22_ky03.module.history.*
 import com.bangkit.ocr_c22_ky03.module.ktp.UploadKtpResponse
 import okhttp3.MultipartBody
@@ -45,5 +46,12 @@ interface ApiService {
         @Path("link") link: String,
 //        @Part("") link: String
     ): Call<FormResponse>
+
+    //@Multipart
+    @GET("{link}")
+    fun getKtp(
+        @Path("link") link: String,
+//        @Part("") link: String
+    ): Call<Ktp2Response>
 
 }
