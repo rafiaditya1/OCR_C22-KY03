@@ -23,6 +23,7 @@ import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
 import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
+import com.bangkit.ocr_c22_ky03.utils.toSquare
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -104,16 +105,17 @@ class KtpActivity : AppCompatActivity() {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
 
-            getFile = myFile
+//            getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
-
+//            val resultCrop = result.toSquare()
+//            getFile = bitmapToFile(resultCrop, application)
             getFile = bitmapToFile(result, application)
 
             Glide.with(this)
                 .load(result)
                 .into(binding.ivResult)
 
-            binding.ivResult.setImageBitmap(result)
+//            binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
             binding.ivScan.visibility = View.INVISIBLE
             binding.btnScan.visibility = View.INVISIBLE
