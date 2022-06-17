@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -64,6 +65,13 @@ class KtpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         userPreference = UserPreference(this)
+
+//        supportActionBar?.setDisplayShowHomeEnabled(true)
+//        supportActionBar?.title = ""
+//        supportActionBar?.setIcon(R.drawable.logo_appbar)
+
+        supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
+        supportActionBar?.setCustomView(R.layout.custom_appbar)
 
 
         if (!allPermissionsGranted()) {

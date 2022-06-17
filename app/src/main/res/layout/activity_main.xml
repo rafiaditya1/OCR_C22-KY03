@@ -54,7 +54,7 @@
     <Button
         android:id="@+id/btn_add"
         style="@style/Button.Large"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:text="@string/add_verification"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,9 @@
 
     <Button
         android:id="@+id/btn_logout"
-        style="@style/Button.Large"
+        style="@style/Button.Border"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/red"
         android:layout_marginTop="8dp"
         android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,6 +3,8 @@ package com.bangkit.ocr_c22_ky03.module.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
+import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityDetailBinding
 import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponseItem
 
@@ -14,6 +16,9 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
+        supportActionBar?.setCustomView(R.layout.custom_appbar)
 
 
         histoy = intent.getParcelableExtra(DATA_KTP)!!

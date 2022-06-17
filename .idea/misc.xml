@@ -13,13 +13,13 @@
         <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_scan.xml" value="0.33" />
         <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/activity_validate.xml" value="0.25" />
         <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/layout/item_row_history.xml" value="0.1762917933130699" />
-        <entry key="..\:/kuliah/Bangkit/fundamental android/OCR_C22-KY03/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.121" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/border_button.xml" value="0.142" />
         <entry key="app/src/main/res/drawable/ic_baseline_insert_photo_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.142" />
+        <entry key="app/src/main/res/drawable/rounded_button_red.xml" value="0.2525" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_form.xml" value="0.2682291666666667" />
@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/activity_scan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_selfie.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/custom_appbar.xml" value="0.2671875" />
       </map>
     </option>
   </component>
