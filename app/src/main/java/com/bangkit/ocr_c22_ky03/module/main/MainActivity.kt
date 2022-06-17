@@ -7,6 +7,7 @@ import com.bangkit.ocr_c22_ky03.module.history.HistoryActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityMainBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.LoginActivity
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
+import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.module.ktp.CameraActivity
 import com.bangkit.ocr_c22_ky03.module.ktp.KtpActivity
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         userPreference = UserPreference(this)
 
         binding.btnAdd.setOnClickListener{
-            intent = Intent(this@MainActivity, KtpActivity::class.java)
+            intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
         }
         binding.btnStatus.setOnClickListener{

@@ -101,7 +101,7 @@
     <ImageView
         android:id="@+id/img_preview"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="400dp"
         android:contentDescription="@string/icon_selfie"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_tryagain"

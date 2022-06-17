@@ -21,6 +21,7 @@ import com.bangkit.ocr_c22_ky03.R
 import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
+import com.bangkit.ocr_c22_ky03.module.form.FormActivity
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
 import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
@@ -113,17 +114,14 @@ class KtpActivity : AppCompatActivity() {
         if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
 
-//            getFile = myFile
+            getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
-//            val resultCrop = result.toSquare()
-//            getFile = bitmapToFile(resultCrop, application)
-            getFile = bitmapToFile(result, application)
 
             Glide.with(this)
                 .load(result)
                 .into(binding.ivResult)
 
-//            binding.ivResult.setImageBitmap(result)
+            binding.ivResult.setImageBitmap(result)
             binding.tvPrepareKTP.visibility = View.INVISIBLE
             binding.ivScan.visibility = View.INVISIBLE
             binding.btnScan.visibility = View.INVISIBLE
@@ -133,29 +131,28 @@ class KtpActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage( preference: UserPreference) {
+    private fun uploadImage(userPreference: UserPreference) {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            var userId = preference.preference.getInt("id", 0).toString()
-            val format = SimpleDateFormat("hh__ss", Locale.CANADA)
-            val now = Date()
-            val nameFile = "Ktp_"+userId.toString()
-
+            val userId = userPreference.preference.getInt("id", 0).toString()
+//            val format = SimpleDateFormat("hh__ss", Locale.CANADA)
+//            val now = Date()
+//            val nameFile = "Ktp_"+userId.toString()
             val imageMultipart = MultipartBody.Part.createFormData(
-             "ktp",
+                "ktp",
                 "${userId}_${file.name}",
                 requestImageFile
             )
             viewModel.uploadImage(imageMultipart, object : UploadCallbackString {
-                override fun onResponse(status: String, path: String) {
-                    if (status == "success") {
+                override fun onResponse(msg: String, path: String) {
+                    if (msg == "success") {
                         Log.e("Bab", file.name.toString())
                         val a = true
-                        showAlertDialog(a, status)
+                        showAlertDialog(a, msg)
                     } else {
                         val a = false
-                        showAlertDialog(a, status)
+                        showAlertDialog(a, msg)
                     }
                 }
             })
@@ -172,6 +169,8 @@ class KtpActivity : AppCompatActivity() {
                 setMessage(getString(R.string.upload_success))
                 setPositiveButton(getString(R.string.btn_continue)) { _, _ ->
                     viewModel.postPath(userPreference)
+                    val intent = Intent(this@KtpActivity, FormActivity::class.java)
+                    startActivity(intent)
                     finish()
                 }
                 create()

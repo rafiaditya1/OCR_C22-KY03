@@ -16,7 +16,7 @@ import kotlin.math.min
 
 
 interface ApiCallbackString {
-    fun onResponse(status: String)
+    fun onResponse(msg: String)
 }
 interface AuthCallbackString {
     fun onResponse(status: String, msg: String)
