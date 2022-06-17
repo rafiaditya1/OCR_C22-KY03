@@ -43,7 +43,6 @@ class LoginViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 val responseBody = response.body()
-
                 if (responseBody != null) {
                     _user.value = response.body()
                     Log.e("hore1", "onResponse: ${response.body()}")

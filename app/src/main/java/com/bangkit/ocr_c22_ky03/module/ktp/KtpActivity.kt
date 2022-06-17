@@ -78,13 +78,10 @@ class KtpActivity : AppCompatActivity() {
 //            startActivity(intent)
         binding.btnNext.setOnClickListener {
             uploadImage()
-            viewModel.link.observe(this){
+            viewModel.link.observe(this) {
                 userPreference.preference.edit().putString("path", it.name_file).apply()
             }
-
         }
-
-
     }
 
     private fun startCameraX() {
