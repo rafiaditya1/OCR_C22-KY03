@@ -1,8 +1,8 @@
 package com.bangkit.ocr_c22_ky03.module.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.ocr_c22_ky03.databinding.ActivityDetailBinding
 import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponseItem
 
@@ -22,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun displayResult() {
-        with(binding){
+        with(binding) {
             tvStatus.text = viewmodel.historyItem.status
             tvNik.text = viewmodel.historyItem.nik
             tvName.text = viewmodel.historyItem.name
@@ -35,11 +35,37 @@ class DetailActivity : AppCompatActivity() {
             tvJob.text = viewmodel.historyItem.pekerjaan
             tvCitizenship.text = viewmodel.historyItem.kewarganegaraan
 
-//            Glide.with(imgPhoto)
-//                .load(viewmodel.storyItem.photoUrl) // URL Avatar
-//                .placeholder(R.drawable.ic_baseline_image_gray)
-//                .error(R.drawable.ic_baseline_broken_image_gray)
-//                .into(imgPhoto)
+//            Glide.with(imgStatusKtp)
+//                .load(viewmodel.historyItem.status) // URL Avatar
+//                .into(imgStatusKtp)
+//            when (viewmodel.historyItem.status) {
+//                "diterima" -> {
+//                    binding.imgStatusKtp = R.drawable
+//                }
+//            }
+
+        }
+
+        with(binding) {
+            when (viewmodel.historyItem.status) {
+                "diterima" -> {
+                    com.bumptech.glide.Glide.with(root.context)
+                        .load(com.bangkit.ocr_c22_ky03.R.drawable.verified)
+                        .into(imgStatusKtp)
+                }
+                "menunggu" -> {
+                    com.bumptech.glide.Glide.with(root.context)
+                        .load(com.bangkit.ocr_c22_ky03.R.drawable.waiting)
+                        .into(imgStatusKtp)
+
+                }
+                else -> {
+                    com.bumptech.glide.Glide.with(root.context)
+                        .load(com.bangkit.ocr_c22_ky03.R.drawable.rejected)
+                        .into(imgStatusKtp)
+                }
+            }
+
         }
     }
 

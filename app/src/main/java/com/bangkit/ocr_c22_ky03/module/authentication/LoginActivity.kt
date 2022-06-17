@@ -37,16 +37,16 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnLogin.setOnClickListener{
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-//            val email = binding.edtEmail.toString()
-//            val password = binding.edtPassword.toString()
-//            viewModel.login(email, password)
-//            viewModel.user.observe(this) { user ->
-//                userPreference.setUserLogin(email, user.accessToken.toString())
-//                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                startActivity(intent)
-//            }
+//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            startActivity(intent)
+            val email = binding.edtEmail.text.toString()
+            val password = binding.edtPassword.text.toString()
+            viewModel.login(email, password)
+            viewModel.user.observe(this) { user ->
+                userPreference.setUserLogin(email, user.accessToken.toString())
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
         viewModel.isLoading.observe(this) {
             showLoading(it, binding.progressBar)
