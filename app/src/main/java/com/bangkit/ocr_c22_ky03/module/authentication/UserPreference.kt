@@ -19,7 +19,7 @@ class UserPreference(context: Context) {
         preference.edit()
             .putString(EMAIL, "")
             .putInt(ID, 0)
-            .putString(TOKEN, "token")
+            .putString(TOKEN, "")
             .putString(PATH, "")
             .apply()
     }

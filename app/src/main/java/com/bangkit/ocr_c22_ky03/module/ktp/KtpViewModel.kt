@@ -79,8 +79,8 @@ class KtpViewModel : ViewModel() {
 //        val ENCODED_HREF2 = URLEncoder.encode(encoded, "utf-8")
         println("Encoded Data: $link")
 
-
-        Log.e("PATH", link.toString())
+        Log.e("PATH", a)
+        Log.e("PATH ENCODED", link)
         print("ini PATH "+link)
         val client = ApiConfig.getMLApiService().postKtp(link)
         client.enqueue(object : Callback<FormResponse> {

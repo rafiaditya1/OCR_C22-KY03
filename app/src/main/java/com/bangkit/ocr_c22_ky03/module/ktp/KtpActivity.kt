@@ -4,11 +4,14 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -18,12 +21,15 @@ import com.bangkit.ocr_c22_ky03.databinding.ActivityKtpBinding
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
 import com.bangkit.ocr_c22_ky03.module.customView.CustomButton
 import com.bangkit.ocr_c22_ky03.utils.UploadCallbackString
+import com.bangkit.ocr_c22_ky03.utils.bitmapToFile
 import com.bangkit.ocr_c22_ky03.utils.reduceFileImage
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class KtpActivity : AppCompatActivity() {
 
@@ -77,7 +83,7 @@ class KtpActivity : AppCompatActivity() {
 //            intent.putExtra(FormActivity.DATA_KTP, result)
 //            startActivity(intent)
         binding.btnNext.setOnClickListener {
-            uploadImage()
+            uploadImage(userPreference)
             viewModel.link.observe(this){
                 userPreference.preference.edit().putString("path", it.name_file).apply()
             }
@@ -101,6 +107,8 @@ class KtpActivity : AppCompatActivity() {
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 
+//            getFile = bitmapToFile(result, application)
+
             Glide.with(this)
                 .load(result)
                 .into(binding.ivResult)
@@ -115,18 +123,24 @@ class KtpActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage() {
+    private fun uploadImage( preference: UserPreference) {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            var userId = preference.preference.getInt("id", 0).toString()
+            val format = SimpleDateFormat("hh__ss", Locale.CANADA)
+            val now = Date()
+            val nameFile = "Ktp_"+userId.toString()
+
             val imageMultipart = MultipartBody.Part.createFormData(
-                "ktp",
-                file.name,
+             "ktp",
+                "${userId}_${file.name}",
                 requestImageFile
             )
             viewModel.uploadImage(imageMultipart, object : UploadCallbackString {
                 override fun onResponse(status: String, path: String) {
                     if (status == "success") {
+                        Log.e("Bab", file.name.toString())
                         val a = true
                         showAlertDialog(a, status)
                     } else {
@@ -139,6 +153,7 @@ class KtpActivity : AppCompatActivity() {
 //            showToast(this@AddStoryActivity, getString(R.string.error_file))
         }
     }
+
 
     private fun showAlertDialog(param: Boolean, status: String) {
         if (param) {
