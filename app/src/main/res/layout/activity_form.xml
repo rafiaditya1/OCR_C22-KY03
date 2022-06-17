@@ -105,23 +105,6 @@
                     android:text="@string/tv_jenis_kelamin" />
             </TableRow>
 
-            <TableRow>
-
-                <TextView
-                    style="@style/Text.TabKey"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/tv_gol_darah" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_gol_darah"
-                    style="@style/Text.TabValue"
-                    android:gravity="start"
-                    android:inputType="text"
-                    android:text="@string/tv_gol_darah" />
-            </TableRow>
 
             <TableRow>
 
@@ -140,25 +123,6 @@
                     android:gravity="start"
                     android:inputType="text"
                     android:text="@string/tv_alamat" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    style="@style/Text.TabKey"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="1"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
-                    android:text="@string/tv_rt_rw" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_rt_rw"
-                    style="@style/Text.TabValue"
-                    android:gravity="start"
-                    android:inputType="text"
-                    android:text="@string/tv_rt_rw" />
             </TableRow>
 
             <TableRow>

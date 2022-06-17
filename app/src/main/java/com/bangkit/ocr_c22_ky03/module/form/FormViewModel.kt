@@ -15,6 +15,7 @@ import retrofit2.Response
 import java.net.URLEncoder
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class FormViewModel : ViewModel() {
 
     private var _dataKtp = MutableLiveData<Ktp2Response>()
@@ -26,14 +27,10 @@ class FormViewModel : ViewModel() {
     private var _message = MutableLiveData<Boolean>()
     val message: LiveData<Boolean> = _message
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getData(preference: UserPreference) {
-        var a = preference.preference.getString("path", "").toString()
-//        a = a?.replace(".jpg", "")
+        val a = preference.preference.getString("path", "").toString()
         val ENCODED_HREF = URLEncoder.encode(a, "utf-8")
-
         val string = "Some text"
-
         // encode a string using Base64 encoder
         val encoder: Base64.Encoder = Base64.getEncoder()
         val link: String = encoder.encodeToString(a.toByteArray())

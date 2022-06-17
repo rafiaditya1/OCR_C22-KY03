@@ -25,9 +25,7 @@ class FormActivity : AppCompatActivity() {
         val nama = binding.edtNama.text.toString()
         val tempatTanggalLahir = binding.edtTempatTglLahir.text.toString()
         val jenisKelamin = binding.edtJenisKelamin.text.toString()
-        val golDarah = binding.edtGolDarah.text.toString()
         val alamat = binding.edtAlamat.text.toString()
-        val rtRw = binding.edtRtRw.text.toString()
         val kelDesa = binding.edtKelDesa.text.toString()
         val kelurahan = binding.edtKecamatan.text.toString()
         val agama = binding.edtAgama.text.toString()
@@ -35,13 +33,21 @@ class FormActivity : AppCompatActivity() {
         val pekrjaan = binding.edtPekerjaan.text.toString()
         val kewarganegaraan = binding.edtKewarganegaraan.text.toString()
 
+        viewModel.getData(pathPreference)
         viewModel.dataKtp.observe(this) {
-            val nik = it.nik.toString()
-
+            val listAlamat: List<Alamat>? = it.alamat
             binding.edtNik.setText(it.nik)
-
+            binding.edtNama.setText(it.nama)
+            binding.edtTempatTglLahir.setText(it.ttl)
+            binding.edtJenisKelamin.setText(it.jenis)
+            binding.edtAlamat.setText(listAlamat?.get(2).toString())
+            binding.edtKelDesa.setText(listAlamat?.get(0).toString())
+            binding.edtKecamatan.setText(listAlamat?.get(1).toString())
+            binding.edtAgama.setText(it.agama)
+            binding.edtStatusPerkawinan.setText(it.status)
+            binding.edtPekerjaan.setText(it.pekerjaan)
+            binding.edtKewarganegaraan.setText(it.kwn)
         }
-
         binding.btnFinish.setOnClickListener {
             viewModel.setData(pathPreference)
             intent = Intent(this@FormActivity, SelfieActivity::class.java)
