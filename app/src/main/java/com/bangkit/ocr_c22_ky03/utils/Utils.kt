@@ -167,7 +167,7 @@ fun bitmapToFile(bitmap: Bitmap?, application: Application): File {
     val photoFile = createFile(application)
     val bmpStream = ByteArrayOutputStream()
 
-    bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, bmpStream)
+    bitmap?.compress(Bitmap.CompressFormat.JPEG, 20, bmpStream)
     val bmpPicByteArray = bmpStream.toByteArray()
 
     val fos = FileOutputStream(photoFile)

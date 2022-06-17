@@ -107,7 +107,7 @@ class KtpActivity : AppCompatActivity() {
             getFile = myFile
             val result = BitmapFactory.decodeFile(myFile.path)
 
-//            getFile = bitmapToFile(result, application)
+            getFile = bitmapToFile(result, application)
 
             Glide.with(this)
                 .load(result)
