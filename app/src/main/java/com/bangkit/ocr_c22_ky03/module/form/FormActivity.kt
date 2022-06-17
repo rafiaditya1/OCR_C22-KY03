@@ -21,6 +21,10 @@ class FormActivity : AppCompatActivity() {
         setContentView(binding.root)
         pathPreference = UserPreference(this)
 
+        val nik = binding.edtNik.text.toString()
+        val nama = binding.edtNama.text.toString()
+        val agama = binding.edtAgama.text.toString()
+
         binding.btnFinish.setOnClickListener {
             viewModel.setData(pathPreference)
             intent = Intent(this@FormActivity, SelfieActivity::class.java)

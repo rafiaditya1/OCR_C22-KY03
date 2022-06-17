@@ -40,7 +40,7 @@ interface ApiService {
     ): Call<LoginResponse>
 
 //@Multipart
-    @POST("{link}")
+    @GET("{link}")
     fun postKtp(
         @Path("link") link: String,
 //        @Part("") link: String
