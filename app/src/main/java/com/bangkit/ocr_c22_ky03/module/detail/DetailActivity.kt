@@ -17,7 +17,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.custom_appbar)
 
 
@@ -40,33 +40,24 @@ class DetailActivity : AppCompatActivity() {
             tvJob.text = viewmodel.historyItem.pekerjaan
             tvCitizenship.text = viewmodel.historyItem.kewarganegaraan
 
-//            Glide.with(imgStatusKtp)
-//                .load(viewmodel.historyItem.status) // URL Avatar
-//                .into(imgStatusKtp)
-//            when (viewmodel.historyItem.status) {
-//                "diterima" -> {
-//                    binding.imgStatusKtp = R.drawable
-//                }
-//            }
-
         }
 
         with(binding) {
             when (viewmodel.historyItem.status) {
                 "diterima" -> {
                     com.bumptech.glide.Glide.with(root.context)
-                        .load(com.bangkit.ocr_c22_ky03.R.drawable.verified)
+                        .load(R.drawable.verified)
                         .into(imgStatusKtp)
                 }
                 "menunggu" -> {
                     com.bumptech.glide.Glide.with(root.context)
-                        .load(com.bangkit.ocr_c22_ky03.R.drawable.waiting)
+                        .load(R.drawable.waiting)
                         .into(imgStatusKtp)
 
                 }
                 else -> {
                     com.bumptech.glide.Glide.with(root.context)
-                        .load(com.bangkit.ocr_c22_ky03.R.drawable.rejected)
+                        .load(R.drawable.rejected)
                         .into(imgStatusKtp)
                 }
             }

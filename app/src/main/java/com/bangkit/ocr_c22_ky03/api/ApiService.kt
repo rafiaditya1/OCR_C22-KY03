@@ -1,8 +1,6 @@
 package com.bangkit.ocr_c22_ky03.api
 
-import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
-import com.bangkit.ocr_c22_ky03.module.form.CheckResponseItem
-import com.bangkit.ocr_c22_ky03.module.form.DataResponseItem
+
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
 import com.bangkit.ocr_c22_ky03.module.form.Ktp2Response
 import com.bangkit.ocr_c22_ky03.module.history.*
@@ -42,18 +40,14 @@ interface ApiService {
         @Field("password") password: String,
     ): Call<LoginResponse>
 
-//@Multipart
     @GET("{link}")
     fun postKtp(
         @Path("link") link: String,
-//        @Part("") link: String
     ): Call<FormResponse>
 
-    //@Multipart
     @GET("{link}")
     fun getKtp(
         @Path("link") link: String,
-//        @Part("") link: String
     ): Call<Ktp2Response>
 
     @FormUrlEncoded

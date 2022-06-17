@@ -34,7 +34,6 @@ class CustomEditText : AppCompatEditText {
                 if (s.toString().length < 16) error = resources.getString(R.string.length_nik)
             }
             override fun afterTextChanged(s: Editable) {
-                // Do nothing.
             }
         })
         backgroundEt = ContextCompat.getDrawable(context, R.drawable.bg_edit_text) as Drawable

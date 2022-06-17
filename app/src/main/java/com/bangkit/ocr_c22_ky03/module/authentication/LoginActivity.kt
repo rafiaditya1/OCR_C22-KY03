@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bangkit.ocr_c22_ky03.databinding.ActivityLoginBinding
-import com.bangkit.ocr_c22_ky03.module.history.HistoryActivity
 import com.bangkit.ocr_c22_ky03.module.main.MainActivity
 import com.bangkit.ocr_c22_ky03.utils.LoginCallbackString
 import com.bangkit.ocr_c22_ky03.utils.showLoading
@@ -39,8 +38,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnLogin.setOnClickListener{
-//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//            startActivity(intent)
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
             viewModel.login(email, password, object : LoginCallbackString{
@@ -64,12 +61,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.logo, View.TRANSLATION_X, -20f, 20f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
-
         val logoTraveloka = ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 1f).setDuration(1000)
         val logoOcr = ObjectAnimator.ofFloat(binding.logoOcr, View.ALPHA, 1f).setDuration(1000)
         val title = ObjectAnimator.ofFloat(binding.tvWelcome, View.ALPHA, 1f).setDuration(1000)
@@ -83,7 +74,6 @@ class LoginActivity : AppCompatActivity() {
         val tRegister = ObjectAnimator.ofFloat(binding.tvRegister, View.ALPHA, 1f).setDuration(1000)
 
         AnimatorSet().apply {
-//            playSequentially(title, subtitle, logoTraveloka, logoOcr, tEmail, etEmail, tPassword, etPassword, bLogin, tDon, tRegister)
             playTogether(title, subtitle, logoTraveloka, logoOcr, tEmail, etEmail, tPassword, etPassword, bLogin, tDon, tRegister)
             start()
         }

@@ -16,12 +16,6 @@ class RegisterViewModel : ViewModel() {
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private var _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
-
-    private var _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
     fun register(
         name: String,
         email: String,
@@ -41,18 +35,14 @@ class RegisterViewModel : ViewModel() {
                 if (responseBody != null) {
                     callback.onResponse("success", "Your account registered")
                     Log.e(ContentValues.TAG, "onResponse: ${response.body()}")
-                    Log.e(ContentValues.TAG, "onSukses: yele ")
-                    print("sukses broo")
                 } else {
                     Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                 }
             }
-
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
             }
-
         })
     }
 }

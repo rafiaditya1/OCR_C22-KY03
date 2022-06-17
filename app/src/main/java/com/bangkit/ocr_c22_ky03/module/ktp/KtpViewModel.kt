@@ -21,10 +21,10 @@ import java.util.*
 class KtpViewModel : ViewModel() {
     private val _link = MutableLiveData<UploadKtpResponse>()
     val link: LiveData<UploadKtpResponse> = _link
-    val abcd = MutableLiveData<UploadKtpResponse>()
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
     fun uploadImage(
         imageMultipart: MultipartBody.Part,
         callback: UploadCallbackString
@@ -41,10 +41,8 @@ class KtpViewModel : ViewModel() {
                     val responseBody = response.body()
                     callback.onResponse(SUCCESS, response.body().toString())
                     if (responseBody != null) {
-                        Log.e(TAG, "onSukses: yele ")
+                        Log.e(TAG, "onSukses: ${response.message()} ")
                         _link.value = response.body()
-                        print("sukses broo")
-//                        print(message)
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -61,21 +59,15 @@ class KtpViewModel : ViewModel() {
         })
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun postPath(
         preference: UserPreference
     ) {
         var a = preference.preference.getString("path", "").toString()
-//        a = a?.replace(".jpg", "")
         val ENCODED_HREF = URLEncoder.encode(a, "utf-8")
-
         val string = "Some text"
-
-        // encode a string using Base64 encoder
         val encoder: Base64.Encoder = Base64.getEncoder()
         val link: String = encoder.encodeToString(a.toByteArray())
         val encoded2: String = encoder.encodeToString(link.toByteArray())
-//        val ENCODED_HREF2 = URLEncoder.encode(encoded, "utf-8")
         println("Encoded Data: $link")
 
         Log.e("PATH", a)

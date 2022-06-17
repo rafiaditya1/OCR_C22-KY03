@@ -31,18 +31,11 @@ class ScanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.custom_appbar)
-
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         binding.captImage.setOnClickListener { takePhoto() }
-//        binding.cameraSwitch.setOnClickListener {
-//            cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
-//            else CameraSelector.DEFAULT_BACK_CAMERA
-//            startCamera()
-//        }
     }
 
     public override fun onResume() {
