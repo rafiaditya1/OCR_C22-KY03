@@ -1,6 +1,7 @@
 package com.bangkit.ocr_c22_ky03.api
 
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
+import com.bangkit.ocr_c22_ky03.module.form.CheckResponseItem
 import com.bangkit.ocr_c22_ky03.module.form.DataResponseItem
 import com.bangkit.ocr_c22_ky03.module.form.FormResponse
 import com.bangkit.ocr_c22_ky03.module.form.Ktp2Response
@@ -58,17 +59,21 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/ktp")
     fun setForm(
-//        @Field("id") id: Int,
-//        @Field("nik") nik: String,
+        @Field("id") id: Int,
+        @Field("nik") nik: String,
         @Field("name") nama: String,
-//        @Field("tempat") tempat: String,
-//        @Field("tgl_lahir") tgl_lahit: String,
-//        @Field("jenis_kelamin") jenis_kelamin: String,
-//        @Field("alamat") alamat: String,
-//        @Field("agama") agama: String,
-//        @Field("status_perkawinan") status_perkawinan: String,
-//        @Field("pekerjaan") pekerjaan: String,
-//        @Field("kewarganegaraan") kewarganegaraan: String,
-    ): Call<DataResponseItem>
+        @Field("tempat") tempat: String,
+        @Field("tgl_lahir") tgl_lahit: String,
+        @Field("jenis_kelamin") jenis_kelamin: String,
+        @Field("gol_darah") gol_darah: String? = null,
+        @Field("alamat") alamat: String? = null,
+        @Field("agama") agama: String,
+        @Field("status_perkawinan") status_perkawinan: String,
+        @Field("pekerjaan") pekerjaan: String,
+        @Field("kewarganegaraan") kewarganegaraan: String,
+        @Field("kode_pos") kode_pos: String? = null,
+        @Field("status") status: String?=null,
+        @Field("foto_ktp") foto_ktp: String?=null,
+    ): Call<DataKtpResponseItem>
 
 }

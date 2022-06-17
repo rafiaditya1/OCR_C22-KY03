@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         userPreference = UserPreference(this)
 
         binding.btnAdd.setOnClickListener{
-            intent = Intent(this@MainActivity, FormActivity::class.java)
+            intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
         }
         binding.btnStatus.setOnClickListener{

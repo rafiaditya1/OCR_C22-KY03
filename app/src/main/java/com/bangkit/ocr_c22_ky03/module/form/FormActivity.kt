@@ -36,7 +36,6 @@ class FormActivity : AppCompatActivity() {
         viewModel.getData(pathPreference)
         viewModel.dataKtp.observe(this) {
 //            listAlamat = it.alamat
-
             binding.edtNik.setText(it.nik)
             binding.edtNama.setText(it.nama)
             binding.edtTempatTglLahir.setText(it.ttl)
@@ -69,10 +68,16 @@ class FormActivity : AppCompatActivity() {
         val kewarganegaraan = binding.edtKewarganegaraan.text.toString()
         binding.btnFinish.setOnClickListener {
             viewModel.setData(
-//                pathPreference, nik,
+                pathPreference,
+                nik,
                 nama,
-//                tempatTanggalLahir, tempatTanggalLahir,
-//                jenisKelamin, agama, status, pekrjaan, kewarganegaraan,
+                tempatTanggalLahir,
+                tempatTanggalLahir,
+                jenisKelamin,
+                agama,
+                status,
+                pekrjaan,
+                kewarganegaraan,
                 object : ApiCallbackString{
                     override fun onResponse(msg: String) {
                         if (msg == "Data saved on Database") {
