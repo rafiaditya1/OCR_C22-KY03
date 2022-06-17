@@ -54,4 +54,20 @@ interface ApiService {
 //        @Part("") link: String
     ): Call<Ktp2Response>
 
+    @FormUrlEncoded
+    @POST("/ktp")
+    fun setForm(
+        @Field("id") id: Int,
+        @Field("nik") nik: String,
+        @Field("name") nama: String,
+        @Field("tempat") tempat: String,
+        @Field("tgl_lahir") tgl_lahit: String,
+        @Field("jenis_kelamin") jenis_kelamin: String,
+        @Field("alamat") alamat: String,
+        @Field("agama") agama: String,
+        @Field("status_perkawinan") status_perkawinan: String,
+        @Field("pekerjaan") pekerjaan: String,
+        @Field("kewarganegaraan") kewarganegaraan: String,
+    ): Call<DataKtpResponseItem>
+
 }

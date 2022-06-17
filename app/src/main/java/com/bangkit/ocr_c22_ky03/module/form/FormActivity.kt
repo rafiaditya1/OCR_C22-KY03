@@ -21,6 +21,9 @@ class FormActivity : AppCompatActivity() {
         setContentView(binding.root)
         pathPreference = UserPreference(this)
 
+        var listAlamat: List<Alamat>?
+        val alamatKtp = ""
+
         val nik = binding.edtNik.text.toString()
         val nama = binding.edtNama.text.toString()
         val tempatTanggalLahir = binding.edtTempatTglLahir.text.toString()
@@ -35,7 +38,7 @@ class FormActivity : AppCompatActivity() {
 
         viewModel.getData(pathPreference)
         viewModel.dataKtp.observe(this) {
-            val listAlamat: List<Alamat>? = it.alamat
+            listAlamat = it.alamat
             binding.edtNik.setText(it.nik)
             binding.edtNama.setText(it.nama)
             binding.edtTempatTglLahir.setText(it.ttl)
@@ -47,9 +50,15 @@ class FormActivity : AppCompatActivity() {
             binding.edtStatusPerkawinan.setText(it.status)
             binding.edtPekerjaan.setText(it.pekerjaan)
             binding.edtKewarganegaraan.setText(it.kwn)
+            for (i in listAlamat!!) {
+                alamatKtp + i
+            }
         }
         binding.btnFinish.setOnClickListener {
-            viewModel.setData(pathPreference)
+            viewModel.setData(
+                pathPreference, nik, nama, tempatTanggalLahir, tempatTanggalLahir, alamatKtp,
+                jenisKelamin, agama, status, pekrjaan, kewarganegaraan
+            )
             intent = Intent(this@FormActivity, SelfieActivity::class.java)
             startActivity(intent)
         }

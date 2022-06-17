@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.ocr_c22_ky03.api.ApiConfig
 import com.bangkit.ocr_c22_ky03.module.authentication.UserPreference
+import com.bangkit.ocr_c22_ky03.module.history.DataKtpResponseItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,7 +41,7 @@ class FormViewModel : ViewModel() {
 
         Log.e("PATH", a)
         Log.e("PATH ENCODED", link)
-        print("ini PATH "+link)
+        print("ini PATH " + link)
         val client = ApiConfig.getMLApiService().getKtp(link)
         client.enqueue(object : Callback<Ktp2Response> {
             override fun onResponse(call: Call<Ktp2Response>, response: Response<Ktp2Response>) {
@@ -51,6 +52,7 @@ class FormViewModel : ViewModel() {
                     Log.e(ContentValues.TAG, "onFailure: ${response.toString()}")
                 }
             }
+
             override fun onFailure(call: Call<Ktp2Response>, t: Throwable) {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
             }
@@ -59,20 +61,37 @@ class FormViewModel : ViewModel() {
     }
 
     fun setData(
-        preference: UserPreference
+        preference: UserPreference,
+        nik: String,
+        nama: String,
+        tempat: String,
+        tgl_lahir: String,
+        jenis_kelamin: String,
+        alamat: String,
+        agama: String,
+        status_perkawinan: String,
+        pekerjaan: String,
+        kewarganegaraan: String
     ) {
-        val link = preference.preference.getString("path", "")
-        val client = ApiConfig.getApiService().postKtp(link.toString())
-        client.enqueue(object : Callback<FormResponse> {
-            override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {
+        val idKtp = preference.preference.getInt("id", 0)
+        val client = ApiConfig.getApiService().setForm(
+            idKtp, nik, nama, tempat, tgl_lahir,
+            jenis_kelamin, alamat, agama, status_perkawinan,
+            pekerjaan, kewarganegaraan
+        )
+        client.enqueue(object : Callback<DataKtpResponseItem> {
+            override fun onResponse(
+                call: Call<DataKtpResponseItem>,
+                response: Response<DataKtpResponseItem>
+            ) {
                 if (response.isSuccessful) {
                     Log.e(ContentValues.TAG, "onResponse: ${response.message()}")
                 } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.toString()}")
+                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<FormResponse>, t: Throwable) {
+            override fun onFailure(call: Call<DataKtpResponseItem>, t: Throwable) {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message.toString()}")
             }
         })
