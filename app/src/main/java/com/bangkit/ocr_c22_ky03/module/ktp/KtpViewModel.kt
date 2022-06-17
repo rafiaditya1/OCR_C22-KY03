@@ -66,22 +66,22 @@ class KtpViewModel : ViewModel() {
     fun postPath(
         preference: UserPreference
     ) {
-        var link = preference.preference.getString("path", "").toString()
-        link = link?.replace(".jpg", "")
-        val ENCODED_HREF = URLEncoder.encode(link, "utf-8")
+        var a = preference.preference.getString("path", "").toString()
+//        a = a?.replace(".jpg", "")
+        val ENCODED_HREF = URLEncoder.encode(a, "utf-8")
 
         val string = "Some text"
 
         // encode a string using Base64 encoder
         val encoder: Base64.Encoder = Base64.getEncoder()
-        val encoded: String = encoder.encodeToString(link.toByteArray())
+        val link: String = encoder.encodeToString(a.toByteArray())
         val encoded2: String = encoder.encodeToString(link.toByteArray())
 //        val ENCODED_HREF2 = URLEncoder.encode(encoded, "utf-8")
-        println("Encoded Data: $encoded")
+        println("Encoded Data: $link")
 
 
-        Log.e("PATH", ENCODED_HREF.toString())
-        print("ini PATH "+ENCODED_HREF)
+        Log.e("PATH", link.toString())
+        print("ini PATH "+link)
         val client = ApiConfig.getMLApiService().postKtp(link)
         client.enqueue(object : Callback<FormResponse> {
             override fun onResponse(call: Call<FormResponse>, response: Response<FormResponse>) {

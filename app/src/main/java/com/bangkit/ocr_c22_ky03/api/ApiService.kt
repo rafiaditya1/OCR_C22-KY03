@@ -39,11 +39,11 @@ interface ApiService {
         @Field("password") password: String,
     ): Call<LoginResponse>
 
-@Multipart
+//@Multipart
     @POST("{link}")
     fun postKtp(
-//        @Path("{link}",encoded = true) link: String,
-        @Part("") link: String
+        @Path("link") link: String,
+//        @Part("") link: String
     ): Call<FormResponse>
 
 }
